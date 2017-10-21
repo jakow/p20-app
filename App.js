@@ -2,7 +2,9 @@
 
 import React from 'react';
 import { Font } from 'expo';
+import { Provider } from 'react-redux';
 import Welcome from './src/scenes/Welcome/Welcome';
+import rootStore from './src/services/store';
 import Main from './src/scenes/Main/Main';
 
 type AppState = {
@@ -29,6 +31,9 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   render() {
-    return (this.state.loaded ? <Main /> : <Welcome />);
+    return (
+      <Provider store={rootStore}>
+        { this.state.loaded ? <Main /> : <Welcome /> }
+      </Provider>);
   }
 }

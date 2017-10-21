@@ -15,15 +15,11 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class Welcome extends React.Component {
-  showCaption = () => {
-    console.log('show caption!');
-  }
-
+export default class Welcome extends React.PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <AnimatedLogo height={100} onAnimationFinish={this.showCaption} />
+        <AnimatedLogo height={100} />
       </View>);
   }
 }

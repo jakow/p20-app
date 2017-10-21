@@ -8,6 +8,9 @@
     ],
     "rules": {
         "global-require": "off",
-        "react/jsx-filename-extension": "off"
+        "react/jsx-filename-extension": "off",
+        "no-underscore-dangle": "off",
+        "no-mixed-operators": "off",
+        "no-restricted-syntax": "off"
     }
 }

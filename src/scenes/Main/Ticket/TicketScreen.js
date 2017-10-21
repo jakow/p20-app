@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import icon from '../../../assets/icons/ticket.png';
+import icon from './assets/ticket.png';
 
 export default class AgendaScreen extends React.Component {
   static navigationOptions = {
@@ -15,8 +15,9 @@ export default class AgendaScreen extends React.Component {
   }
 
   render() {
-    return (<View style={{ paddingTop: 24 }}>
-      <Text>Tickets!</Text>
-    </View>);
+    return (
+      <View style={{ paddingTop: 24 }}>
+        <Text>Tickets!</Text>
+      </View>);
   }
 }

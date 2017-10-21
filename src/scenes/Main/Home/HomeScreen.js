@@ -1,8 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import icon from '../../../assets/icons/home.png';
+import { View, Image } from 'react-native';
+import icon from './assets/home.png';
+import ViewHeader from '../../../components/ViewHeader';
 
 export default class AgendaScreen extends React.Component {
   static navigationOptions = {
@@ -15,8 +16,9 @@ export default class AgendaScreen extends React.Component {
   }
 
   render() {
-    return (<View style={{ paddingTop: 24 }}>
-      <Text>Home</Text>
-    </View>);
+    return (
+      <View style={{ paddingTop: 20 }}>
+        <ViewHeader text="Home" />
+      </View>);
   }
 }
