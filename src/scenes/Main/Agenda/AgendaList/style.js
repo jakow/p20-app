@@ -9,7 +9,7 @@ const notchLength = 16;
 const agendaHeaderPadding = 12;
 const agendaHeaderHeight = 28;
 const agendaItemPadding = 16;
-
+const agendaItemMargin = 12;
 
 export default StyleSheet.create({
   container: {
@@ -72,8 +72,8 @@ export default StyleSheet.create({
     shadowOpacity: 0.1,
     marginLeft: listSideMargin,
     marginRight: listSideMargin,
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: agendaItemMargin,
+    marginBottom: agendaItemMargin,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
@@ -99,6 +99,13 @@ export default StyleSheet.create({
     width: 16,
     height: 24,
     tintColor: mediumGray,
+  },
+  agendaItemTouchable: {
+    position: 'absolute',
+    top: agendaItemPadding + agendaItemMargin,
+    bottom: agendaItemPadding + agendaItemMargin,
+    left: listSideMargin + lineWidth / 2,
+    right: listSideMargin,
   },
 
   agendaFooter: {

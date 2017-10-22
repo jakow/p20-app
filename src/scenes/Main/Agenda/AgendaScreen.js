@@ -36,8 +36,10 @@ const AgendaNavigator = StackNavigator({
   },
   Detail: {
     screen: AgendaDetailScreen,
-  }
-})
+  },
+}, {
+  headerMode: 'screen',
+});
 
 export default class AgendaScreen extends React.Component {
   static navigationOptions = {

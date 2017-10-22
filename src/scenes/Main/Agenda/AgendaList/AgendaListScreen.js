@@ -10,9 +10,10 @@ export default class AgendaListStreen extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={style.container}>
-        <AgendaList />
+        <AgendaList onItemSelect={event => navigate('Detail', { id: event._id })} />
       </View>
     );
   }
