@@ -1,8 +1,22 @@
 /* @flow */
 
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import icon from './assets/ticket.png';
+import TicketStart from './TicketStart/TicketStart';
+import type { Ticket } from '../../../services/tickets/types';
+
+const ticket: Ticket = {
+  checkedIn: false,
+  email: 'bob@bobinator.net',
+  firstName: 'Bob',
+  lastName: 'Bobinator',
+  identifier: '112233445566778899',
+  orderId: 'fecfaf8a36',
+  ticketType: 'Early Bird Ticket + Ball',
+  ticketTypeId: 12,
+  void: false,
+};
 
 export default class AgendaScreen extends React.Component {
   static navigationOptions = {
@@ -14,10 +28,15 @@ export default class AgendaScreen extends React.Component {
       />),
   }
 
+  goToEnterView = () => {
+    const { navigation } = this.props;
+    navigation.navigate('TicketEnter');
+  }
+
   render() {
     return (
-      <View style={{ paddingTop: 24 }}>
-        <Text>Tickets!</Text>
+      <View>
+        <TicketStart onTicketButtonClick={this.goToEnterView} />
       </View>);
   }
 }

@@ -4,9 +4,11 @@ import AgendaList from './AgendaList';
 import style from './style';
 
 
+
 export default class AgendaListStreen extends React.Component {
   static navigationOptions = {
     header: null,
+    title: 'Agenda',
   }
 
   render() {

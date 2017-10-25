@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { primaryColor, backgroundGray, mediumGray, white } from '../../../../theme/colors';
 
-const listSideMargin = 16;
+const listSideMargin = 14;
 const statusBarPaddingTop = 20;
 const blobSize = 16;
 const lineWidth = 4;
 const notchLength = 16;
-const agendaHeaderPadding = 12;
+const agendaHeaderPadding = 8;
 const agendaHeaderHeight = 28;
 const agendaItemPadding = 16;
-const agendaItemMargin = 12;
+const agendaItemMargin = 7;
 
 export default StyleSheet.create({
   container: {
@@ -68,13 +68,16 @@ export default StyleSheet.create({
     padding: agendaItemPadding,
     paddingLeft: agendaItemPadding + 8,
     shadowColor: '#000000',
-    shadowRadius: 6,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     marginLeft: listSideMargin,
     marginRight: listSideMargin,
     marginTop: agendaItemMargin,
     marginBottom: agendaItemMargin,
-    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.15)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 3,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -121,5 +124,12 @@ export default StyleSheet.create({
     tintColor: primaryColor,
     width: 16,
     marginLeft: listSideMargin - 8,
+  },
+  agendaEmpty: {
+    flex: 1,
+    alignItems: 'stretch',
+  },
+  agendaEmptyText: {
+    color: mediumGray,
   },
 });

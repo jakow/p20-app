@@ -3,21 +3,22 @@
 import React from 'react';
 import { Font } from 'expo';
 import { Provider } from 'react-redux';
+import { StyleProvider } from 'native-base';
 import Welcome from './src/scenes/Welcome/Welcome';
 import rootStore from './src/services/store';
 import Main from './src/scenes/Main/Main';
+import getTheme from './src/theme/native-base-theme/components';
+import commonColor from './src/theme/native-base-theme/variables/commonColor';
 
 type AppState = {
   loaded: boolean;
 }
 
-export default class App extends React.Component<{}, AppState> {
-  constructor() {
-    super();
-    this.state = {
-      loaded: false,
-    };
-  }
+export default class App extends React.Component<void, {}, AppState> {
+  state = {
+    loaded: false,
+  };
+
   componentWillMount() {
     Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -33,7 +34,9 @@ export default class App extends React.Component<{}, AppState> {
   render() {
     return (
       <Provider store={rootStore}>
-        { this.state.loaded ? <Main /> : <Welcome /> }
+        <StyleProvider style={getTheme(commonColor)}>
+          { this.state.loaded ? <Main /> : <Welcome /> }
+        </StyleProvider>
       </Provider>);
   }
 }
