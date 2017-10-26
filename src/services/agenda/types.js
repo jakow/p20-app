@@ -46,3 +46,13 @@ export type Venue = {
     geo: LngLat, // longitude, latitude
   }
 } & DbEntry;
+
+export type Speaker = {
+  name: string;
+  speakerCategory: Id,
+  position: string;
+  company: string;
+  photo: { secure_url: string },
+  description: string,
+  edition: Id[],
+} & DbEntry;

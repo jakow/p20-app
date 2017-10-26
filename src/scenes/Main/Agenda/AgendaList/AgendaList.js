@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Text, View, SectionList, TouchableHighlight } from 'react-native';
 import fetchAgenda from '../../../../services/agenda/actions';
 import AgendaDayHeader from './AgendaDayHeader';
+import AgendaEmpty from './AgendaEmpty';
 import type {
   AgendaDay,
   AgendaEventCategory,
@@ -61,16 +62,14 @@ type AgendaProps = {
   agenda: AgendaDay[],
   categories: {[id: string]: AgendaEventCategory},
   venues: {[id: string]: Venue},
-  onRefresh: () => void,
-  onItemSelect: () => void;
   refreshing: boolean,
+  loadAgenda: () => void,
+  onItemSelect: (agendaEventId: string) => void;
 };
 
-class AgendaList extends React.Component<AgendaProps> {
+class AgendaList extends React.Component<void, AgendaProps, void> {
   componentWillMount() {
-    if (this.props.loadAgenda) {
-      this.props.loadAgenda();
-    }
+    this.props.loadAgenda();
   }
 
   render() {
@@ -86,19 +85,13 @@ class AgendaList extends React.Component<AgendaProps> {
         renderSectionHeader={({ section: agendaDay }) => <AgendaDayHeader agendaDay={agendaDay} />}
         ListHeaderComponent={AgendaHeader}
         ListFooterComponent={() => (isEmpty ? null : <AgendaFooter />)}
-        ListEmptyComponent={() => <Text>List empty</Text>}
+        ListEmptyComponent={() => refreshing ? null: <AgendaEmpty /> }
         sections={createSections(agenda, categories, venues)}
         onRefresh={loadAgenda}
         refreshing={refreshing}
       />
     );
   }
-}
-
-AgendaList.defaultProps = {
-  onItemSelect: null,
-  loadAgenda: null,
-  refreshing: false,
 }
 
 const mapStateToProps = state => ({

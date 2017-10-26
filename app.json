@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Poland 2.0",
+    "slug": "p20-app",
     "sdkVersion": "22.0.0",
     "orientation": "portrait"
   }

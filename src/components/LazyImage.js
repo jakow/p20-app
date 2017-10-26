@@ -1,6 +1,17 @@
 // @flow
 import React from 'react';
-import { Image, Text, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View, Platform } from 'react-native';
+import { Spinner } from 'native-base';
+import { spinnerColor } from '../theme/colors';
+
+
+const style = StyleSheet.create({
+  spinnerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0, 0.1)',
+  },
+});
 
 type LazyImageProps = {
   source: any,
@@ -11,35 +22,50 @@ type LazyImageProps = {
 
 type LazyImageState = {
   loaded: boolean,
+  opacity: Animated.Value,
 };
 
 export default class LazyImage extends React.Component<void, LazyImageProps, LazyImageState> {
   state = {
-    loaded: false
+    loaded: false,
+    opacity: new Animated.Value(0),
   };
 
-  componentWillMount() {
-    this.load()
+  onLoad = async () => {
+    this.show();
   }
 
-  async load() {
-    const response = await fetch(this.props.source.uri);
-    if (response.ok) {
-      this.setState({ loaded: true });
-    }
+  show() {
+    Animated.timing(
+      this.state.opacity,
+      {
+        toValue: 1,
+        duration: 400,
+        timing: 'ease-in',
+      },
+    ).start();
   }
 
   render() {
     const {
       source,
-      style,
+      style: imageStyle,
       width,
       height,
     } = this.props;
+    const { opacity } = this.state;
+    console.log(this.state);
     return (
-      this.state.loaded
-        ? <Image source={source} style={ {width, height }, style} />
-        : <View style={StyleSheet.absoluteFill}><Text>Loading</Text></View>
+      <View>
+        <View style={[StyleSheet.absoluteFill, style.spinnerContainer]}>
+          <Spinner color={spinnerColor} />
+        </View>
+        <Animated.Image
+          source={source}
+          style={[imageStyle, { width, height, opacity }]}
+          onLoad={this.onLoad}
+        />
+      </View>
     );
   }
 }

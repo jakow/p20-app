@@ -1,5 +1,6 @@
 // @flow
 
+import moment from 'moment';
 import type { AgendaDay } from './types';
 
 export function parseDates(agenda: AgendaDay[]) {
@@ -29,4 +30,22 @@ export function normalizeData(agenda) {
     }
   }
   return { ...agenda, events };
+}
+
+
+export function formatEventTime(agendaTime?: {start?: Date, end?: Date}) {
+  if (!agendaTime) {
+    return 'TBA';
+  }
+  const { start, end } = agendaTime;
+  const startTime = moment(start).format('HH:mm');
+  const endTime = moment(end).format('HH:mm');
+  if (start != null && end != null) {
+    return `${startTime}—${endTime}`;
+  } else if (start != null) {
+    return `${startTime}—onwards`;
+  } else if (end != null) {
+    return `Until ${endTime}`;
+  }
+  return 'TBA';
 }

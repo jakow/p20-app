@@ -33,7 +33,6 @@ type Props = {
 
 
 export default function HeaderBackButton(props: Props) {
-  console.log(props);
   return (
     <TouchableOpacity
       onPress={props.onPress}
