@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, Text, StyleSheet, View } from 'react-native';
+import typography from '../../../../theme/typography';
 import type { Speaker } from '../../../../services/agenda/types';
 
 type SpeakerProps = {
@@ -8,16 +9,23 @@ type SpeakerProps = {
 }
 
 const style = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   thumbnail: {
-    width: 32,
-    height: 32,
+    width: 48,
+    height: 48,
+    borderRadius: 4,
+    marginRight: 12,
   },
 });
 
 export default function SpeakerThumbnail({ speaker }: SpeakerProps) {
   return (
-    <View>
+    <View style={style.container}>
       <Image source={{ uri: speaker.photo.secure_url }} style={style.thumbnail} />
+      <Text style={typography.title3}>{speaker.name}</Text>
     </View>
   );
 }

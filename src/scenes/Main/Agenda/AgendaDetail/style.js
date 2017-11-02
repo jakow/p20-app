@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { backgroundGray, white } from '../../../../theme/colors';
+import { backgroundGray, mediumGray, white } from '../../../../theme/colors';
 
 export default StyleSheet.create({
   container: {
@@ -13,11 +13,18 @@ export default StyleSheet.create({
   },
   headerText: {
     color: white,
-    textShadowColor: 'rgba(0, 0, 0, 0.7)',
+    textShadowColor: 'argba(0, 0, 0, 0.7)',
     textShadowRadius: 8,
     textShadowOffset: { width: 4, height: 4 },
     padding: 20,
     margin: -20,
     backgroundColor: 'transparent',
+  },
+  footer: {
+    padding: 15,
+  },
+  eventType: {
+    color: mediumGray,
+    marginBottom: 8,
   },
 });

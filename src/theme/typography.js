@@ -39,4 +39,13 @@ export default StyleSheet.create({
     fontSize: 20,
     lineHeight: 25,
   },
+  small: {
+    color: '#888',
+    fontFamily: 'Source Sans Pro SemiBold',
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  bold: {
+    fontFamily: 'Source Sans Pro SemiBold',
+  },
 });

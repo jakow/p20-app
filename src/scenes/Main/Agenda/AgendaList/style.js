@@ -1,8 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
 import { primaryColor, backgroundGray, mediumGray, white } from '../../../../theme/colors';
 
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
+const isIphoneX = Platform.OS === 'ios' && deviceHeight === 812 && deviceWidth === 375;
+
 const listSideMargin = 14;
-const statusBarPaddingTop = 20;
+// eslint-disable-next-line
+const statusBarPaddingTop = Platform.OS === 'ios' ? (isIphoneX ? 44 : 20) : StatusBar.currentHeight;
 const blobSize = 16;
 const lineWidth = 4;
 const notchLength = 16;
@@ -131,5 +135,8 @@ export default StyleSheet.create({
   },
   agendaEmptyText: {
     color: mediumGray,
+  },
+  detailImage: {
+    resizeMode: 'cover',
   },
 });

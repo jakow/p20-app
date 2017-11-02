@@ -2,30 +2,29 @@
 
 import React from 'react';
 import {
-  I18nManager,
   Image,
-  Text,
   View,
   Platform,
   StyleSheet,
 } from 'react-native';
-
+import { Text } from 'native-base';
 import TouchableItem from './TouchableItem';
+import backIcon from './assets/back-icon.png';
+import { primaryColor } from '../theme/colors';
 
 type Props = {
   onPress?: () => void,
   pressColorAndroid?: string,
   title?: ?string,
   titleStyle?: ?any,
-  tintColor?: ?string,
-  truncatedTitle?: ?string,
-  width?: ?number,
+  color?: ?string,
+  disabled?: boolean,
 };
 
 type DefaultProps = {
   pressColorAndroid: string,
-  tintColor: ?string,
-  truncatedTitle: ?string,
+  color: string,
+  disabled: boolean,
 };
 
 type State = {
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'transparent',
+    paddingLeft: Platform.OS === 'ios' ? 8 : 16,
   },
   title: {
     fontSize: 17,
@@ -47,34 +47,24 @@ const styles = StyleSheet.create({
       ? {
         height: 21,
         width: 13,
-        marginLeft: 10,
-        marginRight: 22,
+        marginRight: 5,
         marginVertical: 12,
         resizeMode: 'contain',
-        transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
       }
       : {
         height: 24,
         width: 24,
         margin: 16,
         resizeMode: 'contain',
-        transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
       },
-  iconWithTitle:
-    Platform.OS === 'ios'
-      ? {
-        marginRight: 5,
-      }
-      : {},
+  iconWithTitle: Platform.OS === 'ios' ? { marginRight: 5 } : {},
 });
 
 class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
   static defaultProps = {
     pressColorAndroid: 'rgba(0, 0, 0, .32)',
-    tintColor: Platform.select({
-      ios: '#037aff',
-    }),
-    truncatedTitle: 'Back',
+    color: primaryColor,
+    disabled: false,
   };
 
   state = {};
@@ -92,43 +82,31 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
     const {
       onPress,
       pressColorAndroid,
-      width,
       title,
       titleStyle,
-      tintColor,
-      truncatedTitle,
+      color,
     } = this.props;
-
-    const renderTruncated =
-      this.state.initialTextWidth && width
-        ? this.state.initialTextWidth > width
-        : false;
-
-    const backButtonTitle = renderTruncated ? truncatedTitle : title;
-
-    // eslint-disable-next-line global-require
-    const asset = require('../assets/back-icon.png');
 
     return (
       <TouchableItem
         accessibilityComponentType="button"
-        accessibilityLabel={backButtonTitle}
+        accessibilityLabel={title}
         accessibilityTraits="button"
         testID="header-back"
         delayPressIn={0}
         onPress={onPress}
         pressColor={pressColorAndroid}
-        style={styles.container}
         borderless
+
       >
         <View style={styles.container}>
           <Image
             style={[
               styles.icon,
               !!title && styles.iconWithTitle,
-              !!tintColor && { tintColor },
+              !!color && { tintColor: color },
             ]}
-            source={asset}
+            source={backIcon}
           />
           {Platform.OS === 'ios' &&
             title && (
@@ -136,12 +114,12 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
                 onLayout={this._onTextLayout}
                 style={[
                   styles.title,
-                  !!tintColor && { color: tintColor },
+                  !!color && { color },
                   titleStyle,
                 ]}
                 numberOfLines={1}
               >
-                {backButtonTitle}
+                {title}
               </Text>
             )}
         </View>
@@ -149,7 +127,5 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
     );
   }
 }
-
-
 
 export default HeaderBackButton;

@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { keyBy } from 'lodash';
-import { REQUEST_AGENDA, RECEIVE_AGENDA, AGENDA_ERROR } from './constants';
+import { REQUEST_AGENDA, RECEIVE_AGENDA, AGENDA_ERROR, TOGGLE_FAVOURITE } from './constants';
 import { parseDates, normalizeData } from './utils';
 
 const AGENDA_ENDPOINT = 'https://www.poland20.com/api/agenda';
@@ -20,8 +20,19 @@ export function storeAgendaInLocalStorage(agenda) {
   AsyncStorage.setItem('agenda', JSON.stringify(agenda));
 }
 
+export async function getFavourites() {
+  return await AsyncStorage.getItem('agendaFavourites') || [];
+}
+
 export function getAgendaFromLocalStorage() {
   return AsyncStorage.getItem('agenda');
+}
+
+export function toggleFavourite(id) {
+  return {
+    action: TOGGLE_FAVOURITE,
+    payload: id,
+  };
 }
 
 export default function fetchAgenda() {
@@ -38,7 +49,6 @@ export default function fetchAgenda() {
         agenda: parseDates(agendaObject.agenda),
         speakers: keyBy(speakerArray, '_id'),
       });
-      console.log(agenda);
     } catch (e) {
       agenda = await getAgendaFromLocalStorage(agenda);
       if (agenda == null) {

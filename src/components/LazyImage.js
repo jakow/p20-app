@@ -1,23 +1,26 @@
 // @flow
 import React from 'react';
-import { Animated, StyleSheet, View, Platform } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import { Spinner } from 'native-base';
 import { spinnerColor } from '../theme/colors';
 
 
-const style = StyleSheet.create({
+const defaultStyle = StyleSheet.create({
   spinnerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0, 0.1)',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
 });
 
 type LazyImageProps = {
   source: any,
   style?: any,
-  width: number,
-  height: number,
 };
 
 type LazyImageState = {
@@ -27,7 +30,6 @@ type LazyImageState = {
 
 export default class LazyImage extends React.Component<void, LazyImageProps, LazyImageState> {
   state = {
-    loaded: false,
     opacity: new Animated.Value(0),
   };
 
@@ -49,20 +51,18 @@ export default class LazyImage extends React.Component<void, LazyImageProps, Laz
   render() {
     const {
       source,
-      style: imageStyle,
-      width,
-      height,
+      style,
     } = this.props;
     const { opacity } = this.state;
-    console.log(this.state);
+    console.log(style);
     return (
-      <View>
-        <View style={[StyleSheet.absoluteFill, style.spinnerContainer]}>
+      <View style={style}>
+        <View style={[StyleSheet.absoluteFill, defaultStyle.spinnerContainer]}>
           <Spinner color={spinnerColor} />
         </View>
         <Animated.Image
           source={source}
-          style={[imageStyle, { width, height, opacity }]}
+          style={[defaultStyle.image, { opacity }]}
           onLoad={this.onLoad}
         />
       </View>

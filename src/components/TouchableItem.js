@@ -27,7 +27,7 @@ type Props = {
   pressColor?: string,
   activeOpacity?: number,
   children?: React.Element<*>,
-  style?: StyleSheet.Styles,
+  style?: StyleSheet | {},
 };
 
 type DefaultProps = {

@@ -10,47 +10,56 @@ import type { AgendaEvent, Venue, Speaker } from '../../../../services/agenda/ty
 import { formatEventTime } from '../../../../services/agenda/utils';
 import typography from '../../../../theme/typography';
 import style from './style';
+import defaultEventImage from '../assets/defaultEventImage.jpg';
 
 type AgendaDetailProps = {
   events: {[id: string]: AgendaEvent},
-  venues: {[id: string]: Venue},
   speakers: {[id: string]: Speaker},
   eventId: string,
+  // toggleFavourite: (id: string) => void,
 }
 
 const RATIO = 1.6;
 
-function AgendaDetail({ eventId, events, venues, speakers }: AgendaDetailProps) {
+function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps) {
   const ev = events[eventId];
-  const venue = venues[ev.venue];
   const speakerList = ev.speakers.map(id => speakers[id]);
+  const height = Dimensions.get('window').width / RATIO;
+  const image = ev.image ? { uri: ev.image.secure_url } : defaultEventImage
 
-  const { width } = Dimensions.get('window');
-  const height = width / RATIO;
   return (
-    <ScrollView style={style.container}>
-      <View>
-        <LazyImage
-          source={{ uri: 'http://lorempixel.com/1280/800', headers: { pragma: 'no-cache' } }}
-          placeholder={{ uri: 'https://placehold.it/32x20' }}
-          width={width}
-          height={height}
-        />
-        <View style={style.headerContainer}>
-          <Text style={[typography.header, style.headerText]}>{ev.name}</Text>
-          <Text style={[typography.title2, style.headerText]}>{formatEventTime(ev.time)}</Text>
+    <View style={style.container}>
+      <ScrollView>
+        <View style={style.header}>
+          <LazyImage
+            source={image}
+            style={{ ...style.detailImage, width: '100%', height }}
+          />
+          <View style={style.headerContainer}>
+            <Text style={[typography.header, style.headerText]}>{ev.name}</Text>
+            <Text style={[typography.title2, style.headerText]}>{formatEventTime(ev.time)}</Text>
+          </View>
         </View>
-      </View>
-      <Location venue={venue} />
-      <SpeakerList speakers={speakerList} />
-    </ScrollView>
+        <View style={style.footer}>
+          { ev.venue != null && <Location venue={ev.venue} /> }
+          { speakerList.length > 0 && <SpeakerList speakers={speakerList} /> }
+          { ev.type ?
+            <Text style={[typography.bodyStrong, style.eventType]}>
+              {ev.type.toUpperCase()}
+            </Text> : null
+          }
+          <Text style={[typography.body, style.eventDescription]}>
+            {ev.description}
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 
 const mapStateToProps = state => ({
   events: state.agenda.events,
-  venues: state.agenda.venues,
   speakers: state.agenda.speakers,
 });
 

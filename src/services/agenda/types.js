@@ -1,17 +1,28 @@
 // @flow
 import type { DbEntry, Id } from '../dbTypes';
+import type { Location } from '../location/types';
+
+export type Image = {
+  secure_url: string;
+}
+
+export type Venue = {
+  name: string,
+  location: Location,
+} & DbEntry;
 
 export type AgendaEvent = {
   name: string,
   type: string,
+  image?: Image,
   description?: string,
   time?: {
     start?: Date,
     end?: Date,
   },
-  speakers?: Id[],
+  speakers: Id[],
   agendaDay: Id,
-  venue: Id,
+  venue?: Venue,
   category: Id,
   edition: Id,
 } & DbEntry;
@@ -27,24 +38,6 @@ export type AgendaDay = {
   events: AgendaEvent[],
   edition: Id,
   description: string,
-} & DbEntry;
-
-
-type LngLat = [number, number];
-
-export type Venue = {
-  name: string,
-  location: {
-    name: string, // building name
-    number: string, // unit or shop number
-    street1: string, // street address
-    street2: string, // street address line 2
-    suburb: string,
-    state: string,
-    postcode: string,
-    country: string,
-    geo: LngLat, // longitude, latitude
-  }
 } & DbEntry;
 
 export type Speaker = {

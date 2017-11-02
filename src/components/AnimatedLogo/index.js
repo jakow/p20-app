@@ -6,6 +6,11 @@ import { Svg } from 'expo';
 
 import { paths, background } from './paths';
 
+interface DefaultAnimatedLogoProps {
+  show: boolean;
+  height: number;
+}
+
 interface AnimatedLogoProps {
   height: number;
   show: boolean;
@@ -24,7 +29,8 @@ const aspectRatio = 373.768 / 430.135;
 const DURATION = 200;
 const STAGGER = 15;
 
-export default class AnimatedLogo extends React.Component<AnimatedLogoProps, AnimatedLogoState> {
+export default class AnimatedLogo extends
+  React.Component<DefaultAnimatedLogoProps, AnimatedLogoProps, AnimatedLogoState> {
   static defaultProps = {
     height: 100,
     show: true,

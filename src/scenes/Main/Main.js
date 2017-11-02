@@ -1,14 +1,17 @@
+// @flow
+import React from 'react';
+import { StatusBar, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import HomeScreen from './Home/HomeScreen';
 import AgendaScreen from './Agenda/AgendaScreen';
 import PeopleScreen from './People/PeopleScreen';
 import TicketScreen from './Ticket/TicketScreen';
-import { primaryColor } from '../../theme/colors';
+import { white, primaryColor } from '../../theme/colors';
 import { tabBarLabel } from './style';
 
-export default TabNavigator({
+const Tabs = TabNavigator({
   Home: {
-    screen: HomeScreen
+    screen: HomeScreen,
   },
   Agenda: {
     screen: AgendaScreen,
@@ -24,10 +27,19 @@ export default TabNavigator({
     activeTintColor: primaryColor,
     labelStyle: tabBarLabel,
     style: {
-      backgroundColor: 'white',
+      backgroundColor: white,
     },
     indicatorStyle: {
       backgroundColor: primaryColor,
     },
   },
 });
+
+export default function Main() {
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar barStyle="dark-content" />
+      <Tabs />
+    </View>
+  );
+}

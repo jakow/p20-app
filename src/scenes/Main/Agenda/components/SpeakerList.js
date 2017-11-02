@@ -12,18 +12,28 @@ type SpeakerListProps = {
 const style = StyleSheet.create({
   list: {
     flexWrap: 'wrap',
+    marginBottom: 20,
   },
   item: {
-    width: '50%',
+    marginBottom: 20,
+  },
+  lastItem: {
+    marginBottom: 0,
   },
 });
 
 export default function SpeakerList({ speakers }: SpeakerListProps) {
   return (
-    <View>
-      <View style={style.item}>
-        { speakers.map(s => <SpeakerThumbnail speaker={s} />) }
-      </View>
+    <View style={style.list}>
+      { speakers.map((s, idx) => (
+        <View
+          key={s._id}
+          style={[style.item, (idx === speakers.length - 1) && style.lastItem]}
+        >
+          <SpeakerThumbnail speaker={s} />
+        </View>
+        ))
+      }
     </View>
   );
 }

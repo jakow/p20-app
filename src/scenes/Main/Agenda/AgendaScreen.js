@@ -30,6 +30,6 @@ export default class AgendaScreen extends React.Component {
   }
 
   render() {
-    return <AgendaNavigator />
+    return <AgendaNavigator />;
   }
 }

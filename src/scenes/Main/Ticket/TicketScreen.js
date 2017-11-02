@@ -2,8 +2,11 @@
 
 import React from 'react';
 import { View, Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import icon from './assets/ticket.png';
-import TicketStart from './TicketStart/TicketStart';
+import TicketStartScreen from './TicketStart/TicketStartScreen';
+import TicketEnterScreen from './TicketEnter/TicketEnterScreen';
+import TicketView from './TicketView/TicketView';
 import type { Ticket } from '../../../services/tickets/types';
 
 const ticket: Ticket = {
@@ -18,6 +21,20 @@ const ticket: Ticket = {
   void: false,
 };
 
+const TicketNavigator = StackNavigator({
+  TicketStart: {
+    screen: TicketStartScreen,
+  },
+  TicketEnter: {
+    screen: TicketEnterScreen,
+  },
+  TicketView: {
+    screen: TicketView,
+  },
+}, {
+  headerMode: 'screen',
+});
+
 export default class AgendaScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Ticket',
@@ -28,15 +45,7 @@ export default class AgendaScreen extends React.Component {
       />),
   }
 
-  goToEnterView = () => {
-    const { navigation } = this.props;
-    navigation.navigate('TicketEnter');
-  }
-
   render() {
-    return (
-      <View>
-        <TicketStart onTicketButtonClick={this.goToEnterView} />
-      </View>);
+    return <TicketNavigator />;
   }
 }

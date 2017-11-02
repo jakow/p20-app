@@ -24,7 +24,7 @@ export default {
   badgePadding: platform === 'ios' ? 3 : 0,
 
   // Button
-  btnFontFamily: platform === 'Source Sans Pro',
+  btnFontFamily: 'Source Sans Pro',
   btnDisabledBg: '#b5b5b5',
   btnDisabledClr: '#f1f1f1',
 
@@ -121,17 +121,15 @@ export default {
 
   // Font
   fontFamily: 'Source Sans Pro',
-  fontSizeBase: 15,
+  fontSizeBase: 17,
+  lineHeight: 22,
+  fontSizeH1: 28,
+  lineHeightH1: 34,
+  fontSizeH2: 22,
+  lineHeightH2: 28,
+  fontSizeH3: 20,
+  lineHeightH3: 25,
 
-  get fontSizeH1() {
-    return this.fontSizeBase * 1.8;
-  },
-  get fontSizeH2() {
-    return this.fontSizeBase * 1.6;
-  },
-  get fontSizeH3() {
-    return this.fontSizeBase * 1.4;
-  },
 
   // Footer
   footerHeight: isIphoneX ? 89 : 55,
@@ -199,13 +197,8 @@ export default {
     return this.inputPaddingLeft * 8;
   },
 
-  // Line Height
   btnLineHeight: 19,
-  lineHeightH1: 32,
-  lineHeightH2: 27,
-  lineHeightH3: 22,
   iconLineHeight: platform === 'ios' ? 37 : 30,
-  lineHeight: platform === 'ios' ? 20 : 24,
 
   // List
   listBg: '#fff',
@@ -257,7 +250,7 @@ export default {
   noteFontSize: 14,
 
   // Title
-  titleFontfamily: platform === 'ios' ? 'System' : 'Roboto_medium',
+  titleFontfamily: 'Source Sans Pro',
   titleFontSize: platform === 'ios' ? 17 : 19,
   subTitleFontSize: platform === 'ios' ? 12 : 14,
   subtitleColor: '#FFF',
