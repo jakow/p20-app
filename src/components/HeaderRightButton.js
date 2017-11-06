@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, Platform, StyleSheet, View } from 'react-native';
 import { Text } from 'native-base';
 import TouchableItem from './TouchableItem';
-import { primaryColor } from '../theme/colors';
+import { primaryColor, lightGray } from '../theme/colors';
 import backIcon from './assets/back-icon.png';
 
 type HeaderRightButtonProps = {
@@ -11,6 +11,8 @@ type HeaderRightButtonProps = {
   onPress?: () => void,
   color?: string,
   showIcon?: boolean,
+  disabled?: boolean,
+  disabledColor?: string,
 }
 
 const styles = StyleSheet.create({
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    paddingRight: Platform.OS === 'ios' ? 8 : 16,
+    paddingRight: 16,
   },
   title: {
     fontSize: 17,
@@ -44,13 +46,22 @@ const styles = StyleSheet.create({
   iconWithTitle: Platform.OS === 'ios' ? { marginRight: 5 } : {},
 });
 
-export default function HeaderRightButton({ title, color, onPress, showIcon }: HeaderRightButtonProps) {
+export default function HeaderRightButton({
+  title,
+  disabled,
+  disabledColor,
+  color: activeColor,
+  onPress,
+  showIcon,
+}: HeaderRightButtonProps) {
+  const color = disabled ? disabledColor : activeColor;
   return (
     <TouchableItem
       accessibilityComponentType="button"
       accessibilityLabel={title}
       accessibilityTraits="button"
-      onPress={onPress}
+      onPress={disabled ? undefined : onPress}
+      activeOpacity={disabled ? 1 : undefined}
     >
       <View style={styles.container}>
         <Text style={[styles.title, { color }]}>{title}</Text>
@@ -71,6 +82,8 @@ export default function HeaderRightButton({ title, color, onPress, showIcon }: H
 HeaderRightButton.defaultProps = {
   title: 'Next',
   color: primaryColor,
+  disabled: false,
+  disabledColor: lightGray,
   onPress: null,
   showIcon: false,
 };

@@ -54,7 +54,6 @@ export default class LazyImage extends React.Component<void, LazyImageProps, Laz
       style,
     } = this.props;
     const { opacity } = this.state;
-    console.log(style);
     return (
       <View style={style}>
         <View style={[StyleSheet.absoluteFill, defaultStyle.spinnerContainer]}>
@@ -62,7 +61,7 @@ export default class LazyImage extends React.Component<void, LazyImageProps, Laz
         </View>
         <Animated.Image
           source={source}
-          style={[defaultStyle.image, { opacity }]}
+          style={[defaultStyle.image, style, { opacity }]}
           onLoad={this.onLoad}
         />
       </View>

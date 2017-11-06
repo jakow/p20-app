@@ -5,7 +5,7 @@ import { Font } from 'expo';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
 import Welcome from './src/scenes/Welcome/Welcome';
-import rootStore from './src/services/store';
+import createStore from './src/services/store';
 import Main from './src/scenes/Main/Main';
 import getTheme from './src/theme/native-base-theme/components';
 import commonColor from './src/theme/native-base-theme/variables/commonColor';
@@ -15,11 +15,14 @@ type AppState = {
 }
 
 export default class App extends React.Component<void, {}, AppState> {
+  // eslint-disable-next-line
+  store = {};
   state = {
     loaded: false,
   };
 
   componentWillMount() {
+    this.store = createStore();
     Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
@@ -31,9 +34,11 @@ export default class App extends React.Component<void, {}, AppState> {
     });
   }
 
+
+
   render() {
     return (
-      <Provider store={rootStore}>
+      <Provider store={this.store}>
         <StyleProvider style={getTheme(commonColor)}>
           { this.state.loaded ? <Main /> : <Welcome /> }
         </StyleProvider>

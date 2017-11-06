@@ -12,8 +12,9 @@ export type Ticket = {
   ticketTypeId: number,
 }
 
-export type FormData = {
+export type FormState = {
   email: string,
   ticketId: string,
   valid: boolean,
+  loading: false,
 };

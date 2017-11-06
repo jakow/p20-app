@@ -1,5 +1,4 @@
-/* @flow */
-
+// @flow
 import React from 'react';
 import {
   Image,
@@ -15,16 +14,14 @@ import { primaryColor } from '../theme/colors';
 type Props = {
   onPress?: () => void,
   pressColorAndroid?: string,
-  title?: ?string,
-  titleStyle?: ?any,
-  color?: ?string,
-  disabled?: boolean,
+  title?: string,
+  titleStyle?: any,
+  color?: string,
 };
 
 type DefaultProps = {
   pressColorAndroid: string,
   color: string,
-  disabled: boolean,
 };
 
 type State = {
@@ -64,7 +61,6 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
   static defaultProps = {
     pressColorAndroid: 'rgba(0, 0, 0, .32)',
     color: primaryColor,
-    disabled: false,
   };
 
   state = {};
@@ -87,6 +83,7 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
       color,
     } = this.props;
 
+
     return (
       <TouchableItem
         accessibilityComponentType="button"
@@ -97,31 +94,21 @@ class HeaderBackButton extends React.PureComponent<DefaultProps, Props, State> {
         onPress={onPress}
         pressColor={pressColorAndroid}
         borderless
-
       >
         <View style={styles.container}>
           <Image
-            style={[
-              styles.icon,
-              !!title && styles.iconWithTitle,
-              !!color && { tintColor: color },
-            ]}
+            style={[styles.icon, !!title && styles.iconWithTitle, { tintColor: color }]}
             source={backIcon}
           />
-          {Platform.OS === 'ios' &&
-            title && (
-              <Text
-                onLayout={this._onTextLayout}
-                style={[
-                  styles.title,
-                  !!color && { color },
-                  titleStyle,
-                ]}
-                numberOfLines={1}
-              >
-                {title}
-              </Text>
-            )}
+          {Platform.OS === 'ios' && title && (
+          <Text
+            onLayout={this._onTextLayout}
+            style={[styles.title, { color }, titleStyle]}
+            numberOfLines={1}
+          >
+            {title}
+          </Text>
+          )}
         </View>
       </TouchableItem>
     );

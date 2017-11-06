@@ -8,10 +8,10 @@ import style from './style';
 import ticket from './assets/ticket.png';
 
 type TicketStartProps = {
-  onTicketAvailable: () => void,
+  onTicketAdd: () => void,
 };
 
-export default function TicketStart({ onTicketAvailable }: TicketStartProps) {
+export default function TicketStart({ onTicketAdd }: TicketStartProps) {
   return (
     <View>
       <ScrollView style={{ height: '100%' }}>
@@ -34,7 +34,7 @@ export default function TicketStart({ onTicketAvailable }: TicketStartProps) {
             <Button
               primary
               style={style.button}
-              onPress={onTicketAvailable}
+              onPress={onTicketAdd}
             >
               <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
                 I have a ticket
@@ -45,7 +45,6 @@ export default function TicketStart({ onTicketAvailable }: TicketStartProps) {
               bordered
               primary
               style={style.button}
-              onPress={() => console.log('nice')}
             >
               <Text style={[typography.body, { color: primaryColor, textAlign: 'center' }]}>
                 I do not have a ticket

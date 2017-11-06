@@ -40,8 +40,7 @@ export default StyleSheet.create({
     lineHeight: 25,
   },
   small: {
-    color: '#888',
-    fontFamily: 'Source Sans Pro SemiBold',
+    fontFamily: 'Source Sans Pro',
     fontSize: 13,
     lineHeight: 18,
   },

@@ -15,7 +15,6 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
-  StyleSheet
 } from 'react-native';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -27,7 +26,7 @@ type Props = {
   pressColor?: string,
   activeOpacity?: number,
   children?: React.Element<*>,
-  style?: StyleSheet | {},
+  style?: any,
 };
 
 type DefaultProps = {

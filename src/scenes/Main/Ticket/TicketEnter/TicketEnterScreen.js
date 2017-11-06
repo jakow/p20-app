@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, Text } from 'native-base';
-import HeaderBackButton from '../../../../components/HeaderBackButton';
-import HeaderRightButton from '../../../../components/HeaderRightButton';
 import TicketEnter from './TicketEnter';
+import TicketEnterNextButton from './TicketEnterNextButton';
+import HeaderBackButton from '../../../../components/HeaderBackButton';
 import { white, primaryColor } from '../../../../theme/colors';
 
 export default function TicketEnterScreen({ navigation }) {
@@ -28,10 +27,5 @@ TicketEnterScreen.navigationOptions = ({ navigation }) => ({
       onPress={() => navigation.goBack()}
     />
   ),
-  headerRight: (
-    <HeaderRightButton
-      title="Next"
-      color={navigation.state.params && navigation.state.params.valid ? primaryColor : '#bcbcbc'}
-    />
-  ),
+  headerRight: <TicketEnterNextButton onSuccess={() => navigation.navigate('TicketViewOrStart')} />,
 });
