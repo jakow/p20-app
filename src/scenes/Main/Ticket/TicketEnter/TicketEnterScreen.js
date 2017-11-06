@@ -27,7 +27,7 @@ TicketEnterScreen.navigationOptions = ({ navigation }) => ({
   },
   headerTitle: 'Enter ticket details',
   headerTitleStyle: {
-    fontFamily: 'Source Sans Pro',
+    fontFamily: 'Source Sans Pro SemiBold',
   },
   headerLeft: (
     <HeaderBackButton

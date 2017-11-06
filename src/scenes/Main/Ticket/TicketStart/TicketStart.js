@@ -9,9 +9,10 @@ import ticket from './assets/ticket.png';
 
 type TicketStartProps = {
   onTicketAdd: () => void,
+  onTicketGet: () => void,
 };
 
-export default function TicketStart({ onTicketAdd }: TicketStartProps) {
+export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartProps) {
   return (
     <View>
       <ScrollView style={{ height: '100%' }}>
@@ -45,6 +46,7 @@ export default function TicketStart({ onTicketAdd }: TicketStartProps) {
               bordered
               primary
               style={style.button}
+              onPress={onTicketGet}
             >
               <Text style={[typography.body, { color: primaryColor, textAlign: 'center' }]}>
                 I do not have a ticket

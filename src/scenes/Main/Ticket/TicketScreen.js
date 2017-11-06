@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import icon from './assets/ticket.png';
 import TicketEnterScreen from './TicketEnter/TicketEnterScreen';
 import TicketViewOrStartScreen from './TicketViewOrStartScreen';
+import TicketGet from './TicketGet/TicketGet';
 
 const TicketNavigator = StackNavigator({
   TicketViewOrStart: {
@@ -14,6 +15,9 @@ const TicketNavigator = StackNavigator({
   TicketEnter: {
     screen: TicketEnterScreen,
   },
+  TicketGet: {
+    screen: TicketGet,
+  }
 }, {
   mode: 'modal',
 });

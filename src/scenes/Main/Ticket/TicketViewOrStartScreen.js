@@ -10,17 +10,24 @@ type Props = {
   navigation: any,
 };
 
-export function TicketViewOrStartScreen({ navigation, tickets }: Props) {
+function TicketViewOrStartScreen({ navigation, tickets }: Props) {
   const openTicketEnter = () => {
     navigation.navigate('TicketEnter');
   };
+
+  const openTicketGet = () => {
+    navigation.navigate('TicketGet');
+  }
 
   return (
     tickets.length > 0 ?
       (
         <TicketView onTicketAdd={openTicketEnter} />
       ) : (
-        <TicketStart onTicketAdd={openTicketEnter} />
+        <TicketStart
+          onTicketAdd={openTicketEnter}
+          onTicketGet={openTicketGet}
+        />
       )
   );
 }

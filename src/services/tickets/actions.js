@@ -55,14 +55,11 @@ export async function getTicketsFromStorage(storage: AsyncStorage = AsyncStorage
 export function restoreTicketsFromStorage(storage: AsyncStorage = AsyncStorage) {
   return async (dispatch: (action: any) => void) => {
     dispatch(loading(true));
-    console.log('restoreTicketsFromStorage');
     const tickets = await getTicketsFromStorage(storage);
-    console.log(tickets);
     dispatch(addTickets(tickets));
     dispatch(loading(false));
   };
 }
-
 
 export async function persistTicketToStorage(ticket: Ticket, storage: AsyncStorage = AsyncStorage) {
   const tickets: Ticket[] = await getTicketsFromStorage(storage);
@@ -77,7 +74,10 @@ export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) 
   return async (dispatch: (action: any) => void, getState: () => any) => {
     dispatch(loading(true));
     const formState = getState().ticketForm;
-    const form = JSON.stringify({ email: formState.email, identifier: formState.ticketId });
+    const form = JSON.stringify({
+      email: formState.email.trim(),
+      identifier: formState.ticketId.trim(),
+    });
     try {
       const response = await fetch(`${TICKETS_ENDPOINT}/validate`, {
         method: 'POST',
@@ -115,4 +115,13 @@ export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) 
       dispatch(loading(false));
     }
   };
+}
+
+type TicketAvailability = {
+  available: boolean,
+  url?: string,
+}
+
+export async function getTicketAvailability(): Promise<TicketAvailability> {
+  return fetch(`${TICKETS_ENDPOINT}/availability`).then(r => r.json());
 }

@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import { Font } from 'expo';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
@@ -23,6 +24,13 @@ function loadFonts() {
     'Source Sans Pro Light': require('./src/assets/SourceSansPro/SourceSansPro-Light.ttf'),
     'Source Sans Pro SemiBold': require('./src/assets/SourceSansPro/SourceSansPro-SemiBold.ttf'),
   });
+}
+
+if (process.env.NODE_ENV === 'development') {
+  AsyncStorage.multiRemove([
+    'tickets',
+    'agenda',
+  ]);
 }
 
 export default class App extends React.Component<void, {}, AppState> {
