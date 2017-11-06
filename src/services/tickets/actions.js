@@ -1,9 +1,12 @@
 // @flow
 import { AsyncStorage } from 'react-native';
-import { TICKETS_ENDPOINT, ADD_TICKET, UPDATE_FORM_DATA, SET_FORM_STATE } from './constants';
+import { TICKETS_ENDPOINT, ADD_TICKETS, UPDATE_FORM_DATA, SET_FORM_STATE } from './constants';
 import type { FormState, Ticket } from './types';
 
 const ERROR_DURATION = 3000;
+
+const NOT_FOUND_MESSAGE = 'No ticket with matching information found in the database. Please check if the data is correct and if the problem persists, contact us.';
+const NETWORK_ERROR_MESSAGE = 'It was not possible to connect to server.';
 
 export default function updateData(payload: $Shape<FormState>) {
   return {
@@ -27,15 +30,42 @@ export function showError(error: string) {
   };
 }
 
-function addTicket(ticket: Ticket) {
+export function loading(loadingState: boolean) {
   return {
-    type: ADD_TICKET,
-    payload: ticket,
+    type: SET_FORM_STATE,
+    payload: { loading: loadingState },
   };
 }
 
+function addTickets(tickets: Ticket[]) {
+  return {
+    type: ADD_TICKETS,
+    payload: tickets,
+  };
+}
+
+export async function getTicketsFromStorage(storage: AsyncStorage = AsyncStorage) {
+  const ticketsJson = await storage.getItem('tickets');
+  if (!ticketsJson) {
+    return [];
+  }
+  return (JSON.parse(ticketsJson): Ticket[]);
+}
+
+export function restoreTicketsFromStorage(storage: AsyncStorage = AsyncStorage) {
+  return async (dispatch: (action: any) => void) => {
+    dispatch(loading(true));
+    console.log('restoreTicketsFromStorage');
+    const tickets = await getTicketsFromStorage(storage);
+    console.log(tickets);
+    dispatch(addTickets(tickets));
+    dispatch(loading(false));
+  };
+}
+
+
 export async function persistTicketToStorage(ticket: Ticket, storage: AsyncStorage = AsyncStorage) {
-  const tickets: Ticket[] = JSON.parse(await storage.getItem('tickets') || []);
+  const tickets: Ticket[] = await getTicketsFromStorage(storage);
   if (tickets.find(t => t.identifier === ticket.identifier)) {
     return null;
   }
@@ -43,31 +73,46 @@ export async function persistTicketToStorage(ticket: Ticket, storage: AsyncStora
   return storage.setItem('tickets', JSON.stringify(tickets));
 }
 
-export function findTicket(onSuccess?: () => void) {
+export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) => void) {
   return async (dispatch: (action: any) => void, getState: () => any) => {
-    const form = getState().ticketForm;
+    dispatch(loading(true));
+    const formState = getState().ticketForm;
+    const form = JSON.stringify({ email: formState.email, identifier: formState.ticketId });
     try {
-      const response = await fetch(`${TICKETS_ENDPOINT}/`, {
+      const response = await fetch(`${TICKETS_ENDPOINT}/validate`, {
         method: 'POST',
-        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: form,
       });
-      console.log(response);
-
-
       if (!response.ok) {
-        dispatch(showError('No ticket found'));
+        const message = NOT_FOUND_MESSAGE;
+        dispatch(showError(message));
+        if (onFailure) {
+          onFailure(message);
+        }
         return;
       }
 
       const ticket: Ticket = await response.json();
-      dispatch(addTicket(ticket));
+      const currentTickets: Ticket[] = getState().tickets;
+      if (!currentTickets.find(t => t.identifier === ticket.identifier)) {
+        dispatch(addTickets([ticket]));
+      }
       persistTicketToStorage(ticket);
       dispatch(updateData({ ticketId: '', email: '' }));
       if (onSuccess) {
         onSuccess();
       }
     } catch (e) {
-      dispatch(showError('It was not possible to connect to server.'));
+      const message = NETWORK_ERROR_MESSAGE;
+      if (onFailure) {
+        onFailure(message);
+      }
+      dispatch(showError(message));
+    } finally {
+      dispatch(loading(false));
     }
   };
 }

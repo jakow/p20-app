@@ -1,6 +1,6 @@
 // @flow
 import {
-  ADD_TICKET,
+  ADD_TICKETS,
   UPDATE_FORM_DATA,
   SET_FORM_STATE,
   VALID_EMAIL,
@@ -32,37 +32,12 @@ export function ticketFormReducer(
   }
 }
 
-const initialTicketsTemporaryPleaseRemove = [
-  {
-    checkedIn: false,
-    email: 'bob@bobinator.net',
-    firstName: 'Bob',
-    lastName: 'Bobinator',
-    identifier: '112233445566778899',
-    orderId: 'fecfaf8a36',
-    ticketType: 'Early Bird Ticket + Ball',
-    ticketTypeId: 12,
-    void: false,
-  }, {
-    checkedIn: false,
-    email: 'john@johninator.net',
-    firstName: 'John',
-    lastName: 'Bobinator-With-Very-Long-Name',
-    identifier: '112233445566778899',
-    orderId: 'fecfaf8a36',
-    ticketType: 'Conference + Ball',
-    ticketTypeId: 12,
-    void: false,
-  },
-];
-
-
 export function ticketsReducer(
-  ticketsState: Ticket[] = initialTicketsTemporaryPleaseRemove,
-  action: Action<Ticket>
+  ticketsState: Ticket[] = [],
+  action: Action<Ticket[]>,
 ) {
-  if (action.type !== ADD_TICKET) {
+  if (action.type !== ADD_TICKETS) {
     return ticketsState;
   }
-  return [...ticketsState, action.payload];
+  return [...ticketsState, ...action.payload];
 }

@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 export const UPDATE_FORM_DATA = 'UPDATE_FORM_DATA';
-export const ADD_TICKET = 'ADD_TICKET';
+export const ADD_TICKETS = 'ADD_TICKETS';
 export const SET_FORM_STATE = 'SET_FORM_STATE';
 
 export const VALID_CODE_REGEX = /^\d{17,}$/;

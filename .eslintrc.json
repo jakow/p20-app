@@ -12,5 +12,9 @@
         "no-underscore-dangle": "off",
         "no-mixed-operators": "off",
         "no-restricted-syntax": "off"
+    },
+    "globals": {
+      "fetch": false
     }
+
 }

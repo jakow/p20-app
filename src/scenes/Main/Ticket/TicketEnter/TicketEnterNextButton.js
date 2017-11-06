@@ -7,13 +7,14 @@ import { findTicket } from '../../../../services/tickets/actions';
 type TicketEnterNextButtonProps = {
   disabled: boolean,
   onSuccess: () => void,
+  onFailure: () => void,
   dispatch: (action: any) => void,
 };
 
 class TicketEnterNextButton extends React.Component<void, TicketEnterNextButtonProps, void> {
   onPress = () => {
-    const { dispatch, onSuccess } = this.props;
-    dispatch(findTicket(onSuccess));
+    const { dispatch, onSuccess, onFailure } = this.props;
+    dispatch(findTicket(onSuccess, onFailure));
   }
 
   render() {

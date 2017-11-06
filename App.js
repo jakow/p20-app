@@ -6,12 +6,23 @@ import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
 import Welcome from './src/scenes/Welcome/Welcome';
 import createStore from './src/services/store';
+import { restoreTicketsFromStorage } from './src/services/tickets/actions';
 import Main from './src/scenes/Main/Main';
 import getTheme from './src/theme/native-base-theme/components';
 import commonColor from './src/theme/native-base-theme/variables/commonColor';
 
 type AppState = {
   loaded: boolean;
+}
+
+function loadFonts() {
+  return Font.loadAsync({
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    'Source Sans Pro': require('./src/assets/SourceSansPro/SourceSansPro-Regular.ttf'),
+    'Source Sans Pro Light': require('./src/assets/SourceSansPro/SourceSansPro-Light.ttf'),
+    'Source Sans Pro SemiBold': require('./src/assets/SourceSansPro/SourceSansPro-SemiBold.ttf'),
+  });
 }
 
 export default class App extends React.Component<void, {}, AppState> {
@@ -23,18 +34,11 @@ export default class App extends React.Component<void, {}, AppState> {
 
   componentWillMount() {
     this.store = createStore();
-    Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      'Source Sans Pro': require('./src/assets/SourceSansPro/SourceSansPro-Regular.ttf'),
-      'Source Sans Pro Light': require('./src/assets/SourceSansPro/SourceSansPro-Light.ttf'),
-      'Source Sans Pro SemiBold': require('./src/assets/SourceSansPro/SourceSansPro-SemiBold.ttf'),
-    }).then(() => {
-      this.setState({ loaded: true });
-    });
+    Promise.all([
+      loadFonts(),
+      this.store.dispatch(restoreTicketsFromStorage()),
+    ]).then(() => this.setState({ loaded: true }));
   }
-
-
 
   render() {
     return (

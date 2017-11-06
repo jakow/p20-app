@@ -10,8 +10,11 @@ type Props = {
   navigation: any,
 };
 
-function TicketViewOrStartScreen({ navigation, tickets }: Props) {
-  const openTicketEnter = () => navigation.navigate('TicketEnter');
+export function TicketViewOrStartScreen({ navigation, tickets }: Props) {
+  const openTicketEnter = () => {
+    navigation.navigate('TicketEnter');
+  };
+
   return (
     tickets.length > 0 ?
       (
@@ -22,14 +25,14 @@ function TicketViewOrStartScreen({ navigation, tickets }: Props) {
   );
 }
 
+TicketViewOrStartScreen.navigationOptions = {
+  header: null,
+};
+
 function mapStateToProps(state) {
   return {
     tickets: state.tickets,
   };
-}
-
-TicketViewOrStartScreen.navigationOptions = {
-  header: null,
 }
 
 export default connect(mapStateToProps)(TicketViewOrStartScreen);

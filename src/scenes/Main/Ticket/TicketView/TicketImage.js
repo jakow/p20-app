@@ -24,6 +24,7 @@ export default function TicketImage({ ticket }: TicketImageProps) {
         value={ticket.identifier}
         size={deviceHeight > 600 ? 200 : 120}
         logo={logo}
+        ecl="H"
       />
 
       <View style={style.ticketField}>

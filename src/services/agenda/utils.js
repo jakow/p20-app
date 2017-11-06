@@ -1,10 +1,12 @@
 // @flow
+/* eslint-disable no-param-reassign */
 
 import moment from 'moment';
 import type { AgendaDay } from './types';
 
 export function parseDates(agenda: AgendaDay[]) {
   agenda.forEach((day) => {
+
     day.date = new Date(day.date);
     day.events.forEach((ev) => {
       if (ev.time && ev.time.start) {
@@ -21,7 +23,7 @@ export function parseDates(agenda: AgendaDay[]) {
 /**
  * Normalize agenda events for fast lookup by id
  */
-export function normalizeData(agenda) {
+export function normalizeData(agenda: any) {
   const days = agenda.agenda;
   const events = {};
   for (const d of days) {
