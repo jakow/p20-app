@@ -6,7 +6,7 @@ import Location from '../components/Location';
 import SpeakerList from '../components/SpeakerList';
 import LazyImage from '../../../../components/LazyImage';
 
-import type { AgendaEvent, Venue, Speaker } from '../../../../services/agenda/types';
+import type { AgendaEvent, Speaker } from '../../../../services/agenda/types';
 import { formatEventTime } from '../../../../services/agenda/utils';
 import typography from '../../../../theme/typography';
 import style from './style';
@@ -25,7 +25,7 @@ function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps) {
   const ev = events[eventId];
   const speakerList = ev.speakers.map(id => speakers[id]);
   const height = Dimensions.get('window').width / RATIO;
-  const image = ev.image ? { uri: ev.image.secure_url } : defaultEventImage
+  const image = ev.image ? { uri: ev.image.secure_url } : defaultEventImage;
 
   return (
     <View style={style.container}>

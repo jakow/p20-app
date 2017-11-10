@@ -20,6 +20,7 @@ const AgendaNavigator = StackNavigator({
 });
 
 export default class AgendaScreen extends React.Component {
+  static router = AgendaNavigator.router;
   static navigationOptions = {
     tabBarLabel: 'Agenda',
     tabBarIcon: ({ tintColor }) => (
@@ -30,6 +31,6 @@ export default class AgendaScreen extends React.Component {
   }
 
   render() {
-    return <AgendaNavigator />;
+    return <AgendaNavigator navigation={this.props.navigation} />;
   }
 }

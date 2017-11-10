@@ -6,7 +6,7 @@ import { formatEventTime } from '../../../../services/agenda/utils';
 import style from './style';
 import typography from '../../../../theme/typography';
 import { primaryColor } from '../../../../theme/colors';
-import chevron from './assets/chevron-right.png';
+import chevron from '../assets/chevron-right.png';
 
 
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import HomeScreen from './Home/HomeScreen';
+// import HomeScreen from './Home/HomeScreen';
 import AgendaScreen from './Agenda/AgendaScreen';
 import PeopleScreen from './People/PeopleScreen';
 import TicketScreen from './Ticket/TicketScreen';
@@ -10,9 +10,9 @@ import { white, primaryColor } from '../../theme/colors';
 import { tabBarLabel } from './style';
 
 const Tabs = TabNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
+  // Home: {
+  //   screen: HomeScreen,
+  // },
   Agenda: {
     screen: AgendaScreen,
   },

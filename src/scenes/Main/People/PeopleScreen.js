@@ -1,10 +1,26 @@
 /* @flow */
 
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import SpeakerList from './SpeakerList';
+import SpeakerDetail from './SpeakerDetail';
 import icon from './assets/people.png';
 
-export default class AgendaScreen extends React.Component {
+
+const PeopleNavigator = StackNavigator({
+  SpeakerList: {
+    screen: SpeakerList,
+  },
+  SpeakerDetail: {
+    screen: SpeakerDetail,
+  }
+}, {
+  headerMode: 'screen',
+});
+
+export default class PeopleScreen extends React.Component {
+  static router = PeopleNavigator.router;
   static navigationOptions = {
     tabBarLabel: 'People',
     tabBarIcon: ({ tintColor }) => (
@@ -15,10 +31,6 @@ export default class AgendaScreen extends React.Component {
   }
 
   render() {
-    return (
-      <View style={{ paddingTop: 24 }}>
-        <Text>People</Text>
-      </View>
-    );
+    return <PeopleNavigator navigation={this.props.navigation} />
   }
 }

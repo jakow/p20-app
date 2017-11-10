@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View, SectionList, TouchableHighlight } from 'react-native';
+import { View, SectionList, TouchableHighlight } from 'react-native';
 import fetchAgenda from '../../../../services/agenda/actions';
 import AgendaDayHeader from './AgendaDayHeader';
 import AgendaEmpty from './AgendaEmpty';

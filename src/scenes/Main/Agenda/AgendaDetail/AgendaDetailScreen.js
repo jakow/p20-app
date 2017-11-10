@@ -12,7 +12,7 @@ export default class AgendaDetailScreen extends React.Component {
     },
     headerTitle: 'Event details',
     headerTitleStyle: {
-      fontFamily: 'Source Sans Pro',
+      fontFamily: 'Source Sans Pro SemiBold',
     },
     headerLeft: (
       <HeaderBackButton

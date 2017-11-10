@@ -22,6 +22,7 @@ export default StyleSheet.create({
   },
   footer: {
     padding: 15,
+    paddingBottom: 40,
   },
   eventType: {
     color: mediumGray,

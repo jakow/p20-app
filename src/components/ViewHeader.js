@@ -10,7 +10,7 @@ type SectionHeaderProps = {
 
 const style = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 40,
     paddingLeft: 15,
     paddingRight: 15,
     paddingBottom: 20,

@@ -105,7 +105,9 @@ export default class TicketGet extends React.Component<void, void, TicketGetStat
     }
     return (
       <View style={style.container}>
-        <Text style={[typography.title2, style.infoText]}>Tickets are not available at this time.</Text>
+        <Text style={[typography.title2, style.infoText]}>
+          Tickets are not available at this time.
+        </Text>
       </View>
     );
   }

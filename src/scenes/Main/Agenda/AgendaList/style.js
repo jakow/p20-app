@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
-import { primaryColor, backgroundGray, mediumGray, white } from '../../../../theme/colors';
+import { primaryColor, backgroundGray, mediumGray, lightGray, white } from '../../../../theme/colors';
 
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 const isIphoneX = Platform.OS === 'ios' && deviceHeight === 812 && deviceWidth === 375;
@@ -105,7 +105,7 @@ export default StyleSheet.create({
   agendaItemChevron: {
     width: 16,
     height: 24,
-    tintColor: mediumGray,
+    tintColor: lightGray,
   },
   agendaItemTouchable: {
     position: 'absolute',

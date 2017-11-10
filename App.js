@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import { Font } from 'expo';
+import { AppLoading, Asset, Font } from 'expo';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
 import Welcome from './src/scenes/Welcome/Welcome';
@@ -16,10 +16,23 @@ type AppState = {
   loaded: boolean;
 }
 
+function preloadAssets() {
+  return Promise.all([
+    require('./src/components/assets/back-icon.png'),
+    require('./src/components/assets/nav-arrow.png'),
+    require('./src/components/assets/spinner.png'),
+    require('./src/scenes/Main/Agenda/assets/list.png'),
+    require('./src/scenes/Main/Agenda/assets/location.png'),
+    require('./src/scenes/Main/Agenda/assets/arrow-down.png'),
+    require('./src/scenes/Main/Agenda/assets/chevron-right.png'),
+    require('./src/scenes/Main/People/assets/people.png'),
+    require('./src/scenes/Main/Ticket/assets/reticle.png'),
+    require('./src/scenes/Main/Ticket/assets/ticket.png'),
+  ].map(image => Asset.fromModule(image).downloadAsync()));
+}
+
 function loadFonts() {
   return Font.loadAsync({
-    Roboto: require('native-base/Fonts/Roboto.ttf'),
-    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
     'Source Sans Pro': require('./src/assets/SourceSansPro/SourceSansPro-Regular.ttf'),
     'Source Sans Pro Light': require('./src/assets/SourceSansPro/SourceSansPro-Light.ttf'),
     'Source Sans Pro SemiBold': require('./src/assets/SourceSansPro/SourceSansPro-SemiBold.ttf'),
@@ -42,17 +55,30 @@ export default class App extends React.Component<void, {}, AppState> {
 
   componentWillMount() {
     this.store = createStore();
-    Promise.all([
+  }
+
+  preload = async () => {
+    await Promise.all([
       loadFonts(),
+      preloadAssets(),
       this.store.dispatch(restoreTicketsFromStorage()),
-    ]).then(() => this.setState({ loaded: true }));
+    ]);
   }
 
   render() {
+    if (!this.state.loaded) {
+      return (
+        <AppLoading
+          startAsync={() => this.preload()}
+          onFinish={() => this.setState({ loaded: true })}
+        />
+      );
+    }
+
     return (
       <Provider store={this.store}>
         <StyleProvider style={getTheme(commonColor)}>
-          { this.state.loaded ? <Main /> : <Welcome /> }
+          <Main />
         </StyleProvider>
       </Provider>);
   }

@@ -5,4 +5,4 @@ export const tabBarIcon = {
 
 export const tabBarLabel = {
   fontFamily: 'Source Sans Pro',
-}
+};
