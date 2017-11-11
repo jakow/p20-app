@@ -44,7 +44,7 @@ export default class LazyImage extends React.Component<void, LazyImageProps, Laz
       {
         toValue: 1,
         duration: 300,
-        timing: 'ease-in',
+        timing: 'ease-in-out',
       },
     ).start(() => this.setState({ showSpinner: false }))
   }

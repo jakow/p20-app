@@ -9,6 +9,11 @@ const platform = Platform.OS;
 const platformStyle = undefined;
 export const isIphoneX = platform === 'ios' && deviceHeight === 812 && deviceWidth === 375;
 
+// eslint-disable-next-line
+export const statusBarSize = Platform.OS === 'ios' ? (isIphoneX ? 44 : 20) : 0;
+export const safeAreaBottom = isIphoneX ? 30 : 0;
+export const safeAreaTop = isIphoneX ? 44 : 20;
+
 export default {
   platformStyle,
   platform,

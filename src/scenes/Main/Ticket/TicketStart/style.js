@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { backgroundDark, primaryColor, white } from '../../../../theme/colors';
-
+import { statusBarSize } from '../../../../theme/native-base-theme/variables/commonColor';
 const imageMargin = 20;
 
 export default StyleSheet.create({
@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
 
   banner: {
-    paddingTop: 20 + 20,
+    paddingTop: statusBarSize + 20,
     paddingBottom: 20,
     backgroundColor: backgroundDark,
     width: '100%',

@@ -6,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import SpeakerList from './SpeakerList';
 import SpeakerDetail from './SpeakerDetail';
 import icon from './assets/people.png';
-
+import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 
 const PeopleNavigator = StackNavigator({
   SpeakerList: {
@@ -17,6 +17,9 @@ const PeopleNavigator = StackNavigator({
   }
 }, {
   headerMode: 'screen',
+  headerStyle: {
+    paddingTop: safeAreaTop,
+  },
 });
 
 export default class PeopleScreen extends React.Component {

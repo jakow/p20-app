@@ -5,7 +5,7 @@ import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import AgendaListScreen from './AgendaList/AgendaListScreen';
 import AgendaDetailScreen from './AgendaDetail/AgendaDetailScreen';
-
+import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 import icon from './assets/list.png';
 
 const AgendaNavigator = StackNavigator({

@@ -7,6 +7,7 @@ import HeaderBackButton from '../../../../components/HeaderBackButton';
 import { getTicketAvailability } from '../../../../services/tickets/actions';
 import { primaryColor, backgroundGray, mediumGray, white } from '../../../../theme/colors';
 import typography from '../../../../theme/typography';
+import { safeAreaTop } from '../../../../theme/native-base-theme/variables/commonColor';
 
 
 type TicketGetState = {
@@ -35,6 +36,8 @@ export default class TicketGet extends React.Component<void, void, TicketGetStat
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: white,
+      height: safeAreaTop + 44,
+      paddingTop: safeAreaTop,
     },
     headerTitle: 'Get your ticket',
     headerTitleStyle: {

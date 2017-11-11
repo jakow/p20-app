@@ -1,12 +1,9 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
 import { primaryColor, backgroundGray, mediumGray, lightGray, white } from '../../../../theme/colors';
-
-const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
-const isIphoneX = Platform.OS === 'ios' && deviceHeight === 812 && deviceWidth === 375;
+import { statusBarSize } from '../../../../theme/native-base-theme/variables/commonColor';
 
 const listSideMargin = 14;
 // eslint-disable-next-line
-const statusBarPaddingTop = Platform.OS === 'ios' ? (isIphoneX ? 44 : 20) : StatusBar.currentHeight;
 const blobSize = 16;
 const lineWidth = 4;
 const notchLength = 16;
@@ -30,7 +27,7 @@ export default StyleSheet.create({
     backgroundColor: backgroundGray,
     paddingLeft: listSideMargin,
     paddingRight: listSideMargin,
-    paddingTop: agendaHeaderPadding + statusBarPaddingTop,
+    paddingTop: agendaHeaderPadding + statusBarSize,
     paddingBottom: agendaHeaderPadding,
     flexDirection: 'row',
     alignItems: 'center',
@@ -74,7 +71,7 @@ export default StyleSheet.create({
     shadowColor: '#000000',
     shadowRadius: 3,
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.08,
     marginLeft: listSideMargin,
     marginRight: listSideMargin,
     marginTop: agendaItemMargin,

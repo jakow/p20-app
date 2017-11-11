@@ -4,11 +4,14 @@ import React from 'react';
 import AgendaDetail from './AgendaDetail';
 import { primaryColor, white } from '../../../../theme/colors';
 import HeaderBackButton from '../../../../components/HeaderBackButton';
+import { safeAreaTop } from '../../../../theme/native-base-theme/variables/commonColor';
 
 export default class AgendaDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: white,
+      paddingTop: safeAreaTop,
+      height: 44 + safeAreaTop,
     },
     headerTitle: 'Event details',
     headerTitleStyle: {

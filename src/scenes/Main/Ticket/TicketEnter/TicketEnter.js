@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ScrollView, KeyboardAvoidingView } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import TicketEnterForm from './TicketEnterForm';
 import style from './style';
 
@@ -11,10 +11,8 @@ type TicketEnterProps = {
 
 export default function TicketEnter(props: TicketEnterProps) {
   return (
-    <KeyboardAvoidingView style={style.ticketEnterContainer}>
-      <ScrollView>
-        <TicketEnterForm />
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <KeyboardAwareScrollView style={style.ticketEnterContainer}>
+      <TicketEnterForm />
+    </KeyboardAwareScrollView>
   );
 }

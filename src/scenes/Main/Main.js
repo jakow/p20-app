@@ -8,6 +8,7 @@ import PeopleScreen from './People/PeopleScreen';
 import TicketScreen from './Ticket/TicketScreen';
 import { white, primaryColor } from '../../theme/colors';
 import { tabBarLabel } from './style';
+import { safeAreaBottom } from '../../theme/native-base-theme/variables/commonColor';
 
 const Tabs = TabNavigator({
   // Home: {
@@ -28,6 +29,11 @@ const Tabs = TabNavigator({
     labelStyle: tabBarLabel,
     style: {
       backgroundColor: white,
+      height: 49 + safeAreaBottom,
+      // alignItems: 'flex-start',
+    },
+    tabStyle: {
+      height: 48,
     },
     indicatorStyle: {
       backgroundColor: primaryColor,

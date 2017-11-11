@@ -9,6 +9,7 @@ import SpeakerEntry from './SpeakerEntry';
 import { backgroundGray, lightGray, white } from '../../../theme/colors';
 import typography from '../../../theme/typography';
 import type { Speaker } from '../../../services/agenda/types';
+import { statusBarSize } from '../../../theme/native-base-theme/variables/commonColor';
 
 type SpeakerMap = {[id: string]: Speaker};
 
@@ -45,7 +46,7 @@ const style = StyleSheet.create({
   // },
   container: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: statusBarSize,
     backgroundColor: backgroundGray,
   },
   section: {

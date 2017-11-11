@@ -4,8 +4,9 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import LazyImage from '../../../components/LazyImage';
 import HeaderBackButton from '../../../components/HeaderBackButton';
-import { white, mediumGray, backgroundGray, primaryColor } from '../../../theme/colors';
+import { white, mediumGray, primaryColor } from '../../../theme/colors';
 import typography from '../../../theme/typography';
+import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 import type { Speaker } from '../../../services/agenda/types';
 
 type SpeakerDetailProps = {
@@ -45,8 +46,8 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
   description: {
-    marginTop: 16,
-    marginBottom: 24,
+    marginTop: 24,
+    marginBottom: 32,
     textAlign: 'left',
     width: '100%',
   },
@@ -80,6 +81,8 @@ function SpeakerDetail({ speakers, navigation }: SpeakerDetailProps) {
 SpeakerDetail.navigationOptions = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: white,
+    paddingTop: safeAreaTop,
+    height: 44 + safeAreaTop,
   },
   headerTitle: 'Speaker details',
   headerTitleStyle: {

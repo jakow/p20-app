@@ -5,6 +5,7 @@ import TicketEnter from './TicketEnter';
 import TicketEnterNextButton from './TicketEnterNextButton';
 import HeaderBackButton from '../../../../components/HeaderBackButton';
 import { white, primaryColor } from '../../../../theme/colors';
+import { safeAreaTop } from '../../../../theme/native-base-theme/variables/commonColor';
 
 export default function TicketEnterScreen({ navigation }) {
   return (
@@ -24,6 +25,8 @@ function alertFailure(message: string) {
 TicketEnterScreen.navigationOptions = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: white,
+    height: 44 + safeAreaTop,
+    paddingTop: safeAreaTop,
   },
   headerTitle: 'Enter ticket details',
   headerTitleStyle: {

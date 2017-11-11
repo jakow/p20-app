@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { textColor, mediumGray } from './colors';
 
-
-
 export default StyleSheet.create({
   header: {
     color: textColor,

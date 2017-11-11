@@ -63,6 +63,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           <Label>Ticket ID</Label>
           <Input
             keyboardType="numeric"
+            returnKeyType="next"
             onChangeText={text => this.props.updateData({ ticketId: text })}
             value={this.props.ticketId}
           />
