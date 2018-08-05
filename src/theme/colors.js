@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 
 export const primaryColor = '#E2445C';
+export const secondaryColor = '#FF99A9';
+export const bcgGreen = '#5fc090';
 export const textColor = '#323232';
 export const mediumGray = '#888888';
 export const lightGray = '#CCCCCC';

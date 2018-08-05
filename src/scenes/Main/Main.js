@@ -1,14 +1,17 @@
 // @flow
 import React from 'react';
-import { StatusBar, View } from 'react-native';
+import { PermissionsAndroid, StatusBar, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 // import HomeScreen from './Home/HomeScreen';
 import AgendaScreen from './Agenda/AgendaScreen';
 import PeopleScreen from './People/PeopleScreen';
+import EmpowerPLScreen from './EmpowerPL/EmpowerPLScreen';
 import TicketScreen from './Ticket/TicketScreen';
-import { white, primaryColor } from '../../theme/colors';
+import { white, primaryColor, secondaryColor } from '../../theme/colors';
 import { tabBarLabel } from './style';
 import { safeAreaBottom } from '../../theme/native-base-theme/variables/commonColor';
+
+import {Platform, StyleSheet} from 'react-native';
 
 const Tabs = TabNavigator({
   // Home: {
@@ -23,17 +26,32 @@ const Tabs = TabNavigator({
   Ticket: {
     screen: TicketScreen,
   },
+  EmpowerPL: {
+    screen: EmpowerPLScreen,
+  }
 }, {
+  animationEnabled: true,
   tabBarOptions: {
+    scrollEnabled: true,
     activeTintColor: primaryColor,
+    inactiveTintColor: secondaryColor,
     labelStyle: tabBarLabel,
     style: {
       backgroundColor: white,
-      height: 49 + safeAreaBottom,
+      ...Platform.select({
+        android: {
+          marginTop: 30,
+          height: 49
+        },
+        ios: {
+          height: 49 + safeAreaBottom
+        }
+      }),
       // alignItems: 'flex-start',
     },
     tabStyle: {
       height: 48,
+      width: 110,
     },
     indicatorStyle: {
       backgroundColor: primaryColor,

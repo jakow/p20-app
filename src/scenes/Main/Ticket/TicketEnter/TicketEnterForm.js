@@ -91,6 +91,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
         <Modal
           animationType="slide"
           visible={this.state.showModal}
+          onRequestClose={() => null}
         >
           <ModalHeader
             title="Scan QR code"

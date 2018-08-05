@@ -4,12 +4,19 @@
     "icon": "./src/assets/app-icon/icon.png",
     "version": "0.9.0",
     "slug": "p20-app",
-    "sdkVersion": "22.0.0",
+    "sdkVersion": "23.0.0",
     "ios": {
       "bundleIdentifier": "com.poland20.app"
     },
     "android": {
-      "package": "com.poland20.app"
+      "package": "com.poland20.app",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_PHONE_STATE",
+        "READ_CONTACTS",
+        "INTERNET"
+      ]
     }
   }
 }

@@ -27,7 +27,7 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
             Use your ticket from the app!
           </Text>
           <Text style={[typography.body, style.body]}>
-            You can can your ticket - it will stay right here until the day of the Summit.
+            You can your ticket - it will stay right here until the day of the Summit.
             When you check in, you will not have to print your ticket beforehand or dig
             through emails to find it.
           </Text>
