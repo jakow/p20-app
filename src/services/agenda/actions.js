@@ -5,6 +5,7 @@ import { parseDates, normalizeData } from './utils';
 
 const AGENDA_ENDPOINT = 'https://www.poland20.com/api/agenda';
 const SPEAKERS_ENDPOINT = 'https://www.poland20.com/api/speakers';
+const TEAM_MEMBERS_ENDPOINT = 'https://www.poland20.com/api/teamMembers';
 
 export async function getAgendaFromEndpoint() {
   const result = await fetch(AGENDA_ENDPOINT).then(r => r.json());
@@ -12,7 +13,12 @@ export async function getAgendaFromEndpoint() {
   return result;
 }
 
-export function getSpeakersFromEndpoint() {
+export async function getTeamMembersFromEndpoint() {
+  const result = fetch(TEAM_MEMBERS_ENDPOINT).then(r => r.json());
+  return result;
+}
+
+export async function getSpeakersFromEndpoint() {
   return fetch(SPEAKERS_ENDPOINT).then(r => r.json());
 }
 
@@ -39,21 +45,24 @@ export default function fetchAgenda() {
   let agenda;
   return async (dispatch) => {
     try {
-      const [agendaObject, speakerArray] = await Promise.all([
+      const [agendaObject, speakerArray, teamMembersArray] = await Promise.all([
         getAgendaFromEndpoint(),
         getSpeakersFromEndpoint(),
+        getTeamMembersFromEndpoint(),
       ]);
       // parse dates in the 'days' array and extract events to own event dict
       agenda = normalizeData({
         ...agendaObject,
         agenda: parseDates(agendaObject.agenda),
         speakers: keyBy(speakerArray, '_id'),
+        teamMembers: teamMembersArray,
       });
     } catch (e) {
       agenda = await getAgendaFromLocalStorage(agenda);
       if (agenda == null) {
         dispatch({
           type: AGENDA_ERROR,
+          payload: {},
         });
       }
     } finally {

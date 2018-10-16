@@ -4,12 +4,13 @@ import EmpowerPLVideo from './EmpowerPLVideo';
 import EmpowerPLTop from './EmpowerPLTop';
 import EmpowerPLApply from './EmpowerPLApply';
 import style from './style';
+import colors from '../../../../theme/colors';
 
 export default function EmpowerPLInfo() {
   return (
     <ScrollView contentContainerStyle={{justifyContent: 'center'}}>
       <EmpowerPLTop />
-      <View style={{alignItems: 'center', backgroundColor: '#5fc090'}}>
+      <View style={{alignItems: 'center', backgroundColor: '#E2445C'}}>
         <Text style={style.objectives}>{"\n"}Objectives</Text>
         <View style={style.separator} />
         <Text style={style.desc}>This year, we will launch the second edition of the empowerPL programme, which was started in cooperation with the Boston Consulting Group during last year’s Poland 2.0 Summit.{"\n"}{"\n"}

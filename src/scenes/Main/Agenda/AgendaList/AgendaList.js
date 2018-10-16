@@ -20,6 +20,10 @@ function dayToSection(agendaDay) {
 }
 
 function createSections(agendaDays, eventCategories, venues) {
+  if(agendaDays===undefined)
+  {
+    return [];
+  }
   const sections = agendaDays.map(dayToSection)
   if (sections.length) {
     sections[0].first = true

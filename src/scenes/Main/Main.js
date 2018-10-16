@@ -6,6 +6,8 @@ import { TabNavigator } from 'react-navigation';
 import AgendaScreen from './Agenda/AgendaScreen';
 import PeopleScreen from './People/PeopleScreen';
 import EmpowerPLScreen from './EmpowerPL/EmpowerPLScreen';
+import LocationScreen from './Navigation/NavigationScreen';
+import TeamScreen from './Team/TeamScreen';
 import TicketScreen from './Ticket/TicketScreen';
 import { white, primaryColor, secondaryColor } from '../../theme/colors';
 import { tabBarLabel } from './style';
@@ -23,8 +25,14 @@ const Tabs = TabNavigator({
   People: {
     screen: PeopleScreen,
   },
+  Location:{
+    screen: LocationScreen,
+  },
   Ticket: {
     screen: TicketScreen,
+  },
+  Team: {
+    screen: TeamScreen,
   },
   EmpowerPL: {
     screen: EmpowerPLScreen,

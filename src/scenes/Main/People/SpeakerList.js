@@ -22,6 +22,10 @@ type SpeakerListProps = {
 
 function makeSections(speakerMap: SpeakerMap) {
   // get all speakers as list
+  if(speakerMap===undefined)
+  {
+    return [];
+  }
   const speakers: Speaker[] = Object.values(speakerMap);
   // sort them alphabetically
   speakers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en']));

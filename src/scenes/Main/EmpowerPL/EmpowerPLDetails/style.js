@@ -49,7 +49,7 @@ export default StyleSheet.create({
     fontSize: 18,
   },
   separator: {
-    backgroundColor: '#dfe344',
+    backgroundColor: '#FF99A9',
     width: 100,
     height: 5,
     margin: 15,

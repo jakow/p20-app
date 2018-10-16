@@ -49,3 +49,15 @@ export type Speaker = {
   description: string,
   edition: Id[],
 } & DbEntry;
+
+export type TeamMember = {
+  name: string,
+  email: string,
+  occupation: string,
+  linkedin: string,
+  position: string,
+  photo: { secure_url: string },
+  description: string,
+  edition: Id[],
+  sortOrder: string,
+} & DbEntry;

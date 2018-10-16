@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Image, Text, ScrollView, View } from 'react-native';
+import { Image, Text, ScrollView, View, Linking } from 'react-native';
 import { Button } from 'native-base';
 import typography from '../../../../theme/typography';
 import { primaryColor, white } from '../../../../theme/colors';
@@ -27,7 +27,7 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
             Use your ticket from the app!
           </Text>
           <Text style={[typography.body, style.body]}>
-            You can your ticket - it will stay right here until the day of the Summit.
+            You can use your ticket - it will stay right here until the day of the Summit.
             When you check in, you will not have to print your ticket beforehand or dig
             through emails to find it.
           </Text>
@@ -50,6 +50,16 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
             >
               <Text style={[typography.body, { color: primaryColor, textAlign: 'center' }]}>
                 I do not have a ticket
+              </Text>
+            </Button>
+            <View style={style.spacer} />
+            <Button
+              primary
+              style={style.button}
+              onPress={()=>{ Linking.openURL('https://bit.ly/2MPPj4o')}}
+            >
+              <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
+                Find accomodation
               </Text>
             </Button>
           </View>
