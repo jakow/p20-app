@@ -11,7 +11,7 @@ export default function EmpowerPLInfo() {
             rounded
             style={style.appBttn}
             onPress={ ()=>{ Linking.openURL('http://empowerpl.com/')}}>
-              <Text style={{ textAlign: 'center', marginTop: 6}}>{"\n"}Apply Now!</Text>
+              <Text style={{ textAlign: 'center', marginTop: 0}}>Apply Now!</Text>
           </Button>
 
         </View>

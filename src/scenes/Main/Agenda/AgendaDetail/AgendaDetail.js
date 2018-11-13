@@ -1,12 +1,14 @@
 // @flow
 import React from 'react';
-import { Dimensions, ScrollView, Text, View } from 'react-native';
+import { Dimensions, ScrollView, Text, View, } from 'react-native';
+import { Button } from 'native-base';
 import { connect } from 'react-redux';
 import Location from '../components/Location';
 import SpeakerList from '../components/SpeakerList';
 import LazyImage from '../../../../components/LazyImage';
 
 import type { AgendaEvent, Speaker } from '../../../../services/agenda/types';
+import { primaryColor, white } from '../../../../theme/colors';
 import { formatEventTime } from '../../../../services/agenda/utils';
 import typography from '../../../../theme/typography';
 import style from './style';
@@ -21,7 +23,7 @@ type AgendaDetailProps = {
 
 const RATIO = 1.6;
 
-function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps) {
+function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps, navi) {
   const ev = events[eventId];
   const speakerList = ev.speakers.map(id => speakers[id]);
   const height = Dimensions.get('window').width / RATIO;
@@ -51,7 +53,9 @@ function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps) {
           <Text style={[typography.body, style.eventDescription]}>
             {ev.description}
           </Text>
+          
         </View>
+
       </ScrollView>
     </View>
   );

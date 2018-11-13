@@ -81,8 +81,8 @@ function SpeakerDetail({ speakers, navigation }: SpeakerDetailProps) {
 SpeakerDetail.navigationOptions = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: white,
-    paddingTop: safeAreaTop,
-    height: 44 + safeAreaTop,
+    paddingTop: 0,
+    height: 44 + 0,
   },
   headerTitle: 'Speaker details',
   headerTitleStyle: {

@@ -23,6 +23,7 @@ function makeSections(teamMemberMap: TeamMemberMap) {
   // get all teamMembers as list
 
   const teamMembers: TeamMember[] = Object.values(teamMemberMap);
+
   // sort them alphabetically
   teamMembers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en']));
   // group by the first letter of their names

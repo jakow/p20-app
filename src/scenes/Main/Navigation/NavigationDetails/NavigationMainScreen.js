@@ -20,23 +20,30 @@ export default class NavigationMainScreen extends React.Component {
       <View style={{alignItems: 'center'}}>
         <MapView style={{width: '100%', height: '100%'}}
            initialRegion={{
-               latitude: 51.498796,
-               longitude: -0.174884,
-               latitudeDelta: 0.02,
-               longitudeDelta: 0.02,
+               latitude: 51.50804935,
+               longitude: -0.1605672,
+               latitudeDelta: 0.07,
+               longitudeDelta: 0.07,
            }}>
          <MapView.Marker
-             coordinate={{latitude: 51.498796,
-             longitude: -0.174884,}}
-             title={"Imperial College London"}
-             description={"Location of summit"}
+             coordinate={{latitude: 51.4984453,
+             longitude: -0.1747805,}}
+             title={"Imperial College London - City and Guilds building"}
+             description={"Workshops - 23rd November"}
           />
           <MapView.Marker
-              coordinate={{latitude: 51.488796,
-              longitude: -0.184884,}}
-              title={"Other Location"}
-              description={"Location to show multiple pin for summit"}
+              coordinate={{latitude: 51.5173027,
+              longitude: -0.1887792,}}
+              title={"Porchester Hall"}
+              description={"EmpowerPL Ball - 24th November"}
            />
+
+           <MapView.Marker
+               coordinate={{latitude: 51.5059347,
+               longitude: -0.1323546,}}
+               title={"Royal Society"}
+               description={"Conference Location - 24th November"}
+            />
        </MapView>
       </View>
     );

@@ -23,6 +23,19 @@ export function parseDates(agenda: AgendaDay[]) {
 /**
  * Normalize agenda events for fast lookup by id
  */
+
+export function sortArray(data){
+  for(i = 0; i<data.agenda.length; i++)
+  {
+    data.agenda[i].events.sort(function (a, b) {
+        var t1 = new Date(a.time.start);
+        var t2 = new Date(b.time.start);
+        return t1.getTime() > t2.getTime();
+    })
+  }
+  return data;
+}
+
 export function normalizeData(agenda: any) {
   const days = agenda.agenda;
   const events = {};

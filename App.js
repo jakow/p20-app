@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { AsyncStorage } from 'react-native';
-import { AppLoading, Asset, Font } from 'expo';
+import { AsyncStorage, ToastAndroid } from 'react-native';
+import { AppLoading, Asset, Font, Permissions, Notifications } from 'expo';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
 import Welcome from './src/scenes/Welcome/Welcome';
@@ -15,6 +15,8 @@ import commonColor from './src/theme/native-base-theme/variables/commonColor';
 type AppState = {
   loaded: boolean;
 }
+
+const PUSH_ENDPOINT = 'https://www.poland20.com/api/notifications/register';
 
 function preloadAssets() {
   return Promise.all([
@@ -46,11 +48,50 @@ if (process.env.NODE_ENV === 'development') {
   ]);
 }
 
+async function registerForPushNotificationsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  if (existingStatus !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+  if (finalStatus !== 'granted') {
+    return;
+  }
+  let token1 = await Notifications.getExpoPushTokenAsync();
+
+  return fetch(PUSH_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: {
+        value: token1,
+      },
+    }),
+  });
+}
+
 export default class App extends React.Component<void, {}, AppState> {
   // eslint-disable-next-line
   store = {};
   state = {
+    notification: {},
     loaded: false,
+  };
+
+  componentDidMount() {
+    registerForPushNotificationsAsync();
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+  }
+
+  _handleNotification = (notification) => {
+    this.setState({notification: notification});
   };
 
   componentWillMount() {

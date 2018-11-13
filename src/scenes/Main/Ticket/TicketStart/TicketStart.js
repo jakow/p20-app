@@ -11,6 +11,20 @@ type TicketStartProps = {
   onTicketAdd: () => void,
   onTicketGet: () => void,
 };
+/* in line 49 add code below if you want to add functionality of storing Ticket
+on device
+
+// <Button
+//   primary
+//   style={style.button}
+//   onPress={onTicketAdd}
+// >
+//   <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
+//     I have a ticket
+//   </Text>
+// </Button>
+
+*/
 
 export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartProps) {
   return (
@@ -32,15 +46,7 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
             through emails to find it.
           </Text>
           <View style={style.buttons}>
-            <Button
-              primary
-              style={style.button}
-              onPress={onTicketAdd}
-            >
-              <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
-                I have a ticket
-              </Text>
-            </Button>
+
             <View style={style.spacer} />
             <Button
               bordered
@@ -56,7 +62,7 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
             <Button
               primary
               style={style.button}
-              onPress={()=>{ Linking.openURL('https://bit.ly/2MPPj4o')}}
+              onPress={()=>{ Linking.openURL('https://www.facebook.com/groups/2059579994074136')}}
             >
               <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
                 Find accomodation

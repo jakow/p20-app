@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ToastAndroid } from 'react-native';
 import AgendaList from './AgendaList';
 import style from './style';
 
@@ -14,7 +14,7 @@ export default class AgendaListScreen extends React.Component {
     return (
       <View style={style.container}>
         <AgendaList
-          onItemSelect={event => navigation.navigate('Detail', { id: event._id })}
+          onItemSelect={event => {event.type == "Questions" ? navigation.navigate('Questions') : navigation.navigate('Detail', { id: event._id })}}
         />
       </View>
     );

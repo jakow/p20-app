@@ -40,7 +40,7 @@ function makeSections(speakerMap: SpeakerMap) {
     });
   });
   // finally, sort the sections alphabetically
-  sections.sort();
+  sections.sort((s1, s2) => s1.title.localeCompare(s2.title, ['pl', 'en']));
   return sections;
 }
 

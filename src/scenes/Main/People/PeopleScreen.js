@@ -18,7 +18,8 @@ const PeopleNavigator = StackNavigator({
 }, {
   headerMode: 'screen',
   headerStyle: {
-    paddingTop: safeAreaTop,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 });
 

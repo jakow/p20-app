@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
       : {
         height: 24,
         width: 24,
-        margin: 16,
+        marginRight: 16,
         resizeMode: 'contain',
       },
   iconWithTitle: Platform.OS === 'ios' ? { marginRight: 5 } : {},

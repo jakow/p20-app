@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, SectionList, TouchableHighlight } from 'react-native';
+import { View, SectionList, TouchableHighlight, ToastAndroid } from 'react-native';
 import fetchAgenda from '../../../../services/agenda/actions';
 import AgendaDayHeader from './AgendaDayHeader';
 import AgendaEmpty from './AgendaEmpty';
@@ -19,12 +19,26 @@ function dayToSection(agendaDay) {
   return { ...agendaDay, key: agendaDay._id, data: agendaDay.events };
 }
 
+function sortEvent(agendaDay){
+  agendaDay.data = agendaDay.data.sort((s1, s2) => {
+    var t1 = new Date(s1.time.start);
+    var t2 = new Date(s2.time.start);
+    return t1.getTime() > t2.getTime()});
+  return agendaDay;
+}
+
 function createSections(agendaDays, eventCategories, venues) {
   if(agendaDays===undefined)
   {
     return [];
   }
-  const sections = agendaDays.map(dayToSection)
+
+
+  const sectionsRet = agendaDays.map(dayToSection)
+  const sections = sectionsRet.map(sortEvent)
+  // ToastAndroid.show(Object.entries(sections[0]).toString(), ToastAndroid.SHORT);
+
+
   if (sections.length) {
     sections[0].first = true
   }
@@ -40,6 +54,9 @@ function createSections(agendaDays, eventCategories, venues) {
       }
     }
   }
+
+  const retVal = sections.map(sortEvent);
+
   return sections;
 }
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TicketStart from './TicketStart/TicketStart';
 import TicketView from './TicketView/TicketView';
 import type { Ticket } from '../../../services/tickets/types';
-import AppLink from 'react-native-app-link';
+// import AppLink from 'react-native-app-link';
 
 type Props = {
   tickets: Ticket[],
@@ -19,19 +19,19 @@ function TicketViewOrStartScreen({ navigation, tickets }: Props) {
       początkowo używany był ticketbase ale strona nie działała i przerzuciliśmy się na eventbrite
       dlatego używamy ich aplikacji. Jeśli chcecie używać poprzedniego api, po prostu odkomentuj poniższą linie kodu
     */
-    // navigation.navigate('TicketEnter');
+    navigation.navigate('TicketEnter');
     /* wtedy możesz to okomentować */
-    const url = "Eventbrite://"
-    const appName = "Eventbrite";
-    const appStoreId = "487922291";
-    const appStoreLocale = "uk"
-    const playStoreId = "com.eventbrite.attendee"
-    AppLink.maybeOpenURL(url, { appName, appStoreId, appStoreLocale, playStoreId }).then(() => {
-      // do stuff
-    })
-    .catch((err) => {
-      // handle error
-    });
+    // const url = "Eventbrite://"
+    // const appName = "Eventbrite";
+    // const appStoreId = "487922291";
+    // const appStoreLocale = "uk"
+    // const playStoreId = "com.eventbrite.attendee"
+    // AppLink.maybeOpenURL(url, { appName, appStoreId, appStoreLocale, playStoreId }).then(() => {
+    //   // do stuff
+    // })
+    // .catch((err) => {
+    //   // handle error
+    // });
   };
 
   const openTicketGet = () => {

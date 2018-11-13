@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import typography from '../theme/typography';
 
 type SectionHeaderProps = {
@@ -10,7 +10,7 @@ type SectionHeaderProps = {
 
 const style = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: Platform.OS === 'ios' ? 40 : 15,
     paddingLeft: 15,
     paddingRight: 15,
     paddingBottom: 20,

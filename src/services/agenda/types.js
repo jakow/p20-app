@@ -61,3 +61,14 @@ export type TeamMember = {
   edition: Id[],
   sortOrder: string,
 } & DbEntry;
+
+export type endQuestions = {
+  text: string,
+  askedBy: string,
+  forEvent: Id,
+  toPerson: Id,
+  dateCreated: Date,
+  accepted: boolean,
+  dateAccepted: Date,
+  archived: boolean,
+} & DbEntry;
