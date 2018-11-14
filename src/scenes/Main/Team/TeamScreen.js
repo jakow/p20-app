@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import TeamList from './TeamList';
 import TeamDetail from './TeamDetail';
-import icon from './assets/people.png';
+import icon from './assets/team.png';
 import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 
 const TeamNavigator = StackNavigator({

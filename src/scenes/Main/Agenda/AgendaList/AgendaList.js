@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, SectionList, TouchableHighlight, ToastAndroid } from 'react-native';
+import { View, SectionList, TouchableHighlight, ToastAndroid, Text } from 'react-native';
 import fetchAgenda from '../../../../services/agenda/actions';
 import AgendaDayHeader from './AgendaDayHeader';
 import AgendaEmpty from './AgendaEmpty';
@@ -16,14 +16,24 @@ import AgendaItem from './AgendaItem';
 import style from './style';
 
 function dayToSection(agendaDay) {
-  return { ...agendaDay, key: agendaDay._id, data: agendaDay.events };
+  return { ...agendaDay, key: agendaDay._id, data: sortEvents(agendaDay.events) };
+}
+
+function sortEvents(agendaEvents){
+  agendaEvents.sort((s1, s2) => {
+    var t1 = new Date(s1.time.start);
+    var t2 = new Date(s2.time.start);
+    return t1.getTime() - t2.getTime()});
+
+  return agendaEvents;
 }
 
 function sortEvent(agendaDay){
   agendaDay.data = agendaDay.data.sort((s1, s2) => {
     var t1 = new Date(s1.time.start);
     var t2 = new Date(s2.time.start);
-    return t1.getTime() > t2.getTime()});
+    return t1.getTime() - t2.getTime()});
+
   return agendaDay;
 }
 
@@ -56,8 +66,9 @@ function createSections(agendaDays, eventCategories, venues) {
   }
 
   const retVal = sections.map(sortEvent);
+  // this.setState({data: ["done"]})
 
-  return sections;
+  return retVal;
 }
 
 function renderAgendaItem(agendaEvent, eventCategories, onSelect) {
@@ -88,6 +99,11 @@ type AgendaProps = {
   onItemSelect: (agendaEventId: string) => void;
 };
 
+state = {
+  data: [],
+  key: [],
+}
+
 class AgendaList extends React.Component<void, AgendaProps, void> {
   componentWillMount() {
     this.props.loadAgenda();
@@ -99,7 +115,10 @@ class AgendaList extends React.Component<void, AgendaProps, void> {
     } = this.props;
     const isEmpty = agenda == null || agenda.length === 0;
 
+    const agendaConst = createSections(agenda, categories, venues);
+
     return (
+      <View>
       <SectionList
         renderItem={({ item }) => renderAgendaItem(item, categories, onItemSelect)}
         keyExtractor={item => item._id}
@@ -107,10 +126,11 @@ class AgendaList extends React.Component<void, AgendaProps, void> {
         ListHeaderComponent={AgendaHeader}
         ListFooterComponent={() => (isEmpty ? null : <AgendaFooter />)}
         ListEmptyComponent={() => refreshing ? null: <AgendaEmpty /> }
-        sections={createSections(agenda, categories, venues)}
+        sections={agendaConst}
         onRefresh={loadAgenda}
         refreshing={refreshing}
       />
+      </View>
     );
   }
 }

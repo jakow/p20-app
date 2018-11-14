@@ -102,7 +102,7 @@ function TeamDetail({ teamMembers, navigation }: TeamDetailProps) {
             : null
             }
             {teamMember.email ?
-              <TouchableWithoutFeedback onPress={()=>{ Linking.openURL('mailto:'+teamMember.email)}}>
+              <TouchableWithoutFeedback onPress={()=>{ Linking.openURL('mailto://'+teamMember.email)}}>
                 <Image
                   style={{width: 50, height: 50, paddingLeft: 20}}
                   source={require('./assets/mail.png')}
