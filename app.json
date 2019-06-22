@@ -2,17 +2,17 @@
   "expo": {
     "name": "Poland 2.0",
     "icon": "./src/assets/logo@3x.png",
-    "version": "0.9.6",
+    "version": "0.9.7",
     "slug": "p20-app",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "33.0.0",
     "ios": {
-      "bundleIdentifier": "com.poland20.app",
+      "bundleIdentifier": "com.poland20summit.app",
       "config": {
-        "googleMapsApiKey": "AIzaSyAqr0gsz1czYe5kjyTbOVEBAhMR6wavFwA",
+        "googleMapsApiKey": "AIzaSyAqr0gsz1czYe5kjyTbOVEBAhMR6wavFwA"
       }
     },
     "notification": {
-      "icon": "./src/assets/logo.png",
+      "icon": "./src/assets/logo.png"
     },
     "android": {
       "package": "com.poland20.app",
@@ -21,14 +21,13 @@
           "apiKey": "AIzaSyAqr0gsz1czYe5kjyTbOVEBAhMR6wavFwA"
         }
       },
-      "versionCode": 7,
+      "versionCode": 8,
       "permissions": [
         "NOTIFICATIONS",
         "READ_PHONE_STATE",
         "INTERNET",
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION",
-
+        "ACCESS_FINE_LOCATION"
       ]
     }
   }

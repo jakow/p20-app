@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import NavigationMainScreen from './NavigationDetails/NavigationMainScreen';
 import icon from './assets/pin.png';
 
 
 
-const NavigationNavigator = StackNavigator({
+const NavigationNavigator = createStackNavigator({
   List: {
     screen: NavigationMainScreen,
   }

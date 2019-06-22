@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import SpeakerList from './SpeakerList';
 import SpeakerDetail from './SpeakerDetail';
 import icon from './assets/people.png';
 import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 
-const PeopleNavigator = StackNavigator({
+const PeopleNavigator = createStackNavigator({
   SpeakerList: {
     screen: SpeakerList,
   },

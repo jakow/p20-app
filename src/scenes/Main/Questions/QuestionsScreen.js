@@ -3,6 +3,8 @@ import { View, ToastAndroid } from 'react-native';
 import { primaryColor, white } from '../../../theme/colors';
 import HeaderBackButton from '../../../components/HeaderBackButton';
 import QuestionsList from './QuestionsList';
+import { Image } from 'react-native';
+import icon from './Assets/question.png';
 // import style from './style';
 
 export default class QuestionsScreen extends React.Component {
@@ -23,6 +25,12 @@ export default class QuestionsScreen extends React.Component {
         onPress={() => navigation.goBack()}
       />
     ),
+    tabBarLabel: 'Questions',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={icon}
+        style={{ width: 28, height: 25, tintColor }}
+      />)
   });
 
   render() {

@@ -19,15 +19,25 @@ type TeamMemberListProps = {
   loadAgenda: () => void,
 };
 
+function changeName(speaker){
+  var arr = speaker.name.split(" ");
+  temp = arr.pop();
+  arr.unshift(temp);
+  speaker.displayName = arr.join(" ");
+  return speaker;
+}
+
 function makeSections(teamMemberMap: TeamMemberMap) {
   // get all teamMembers as list
 
   const teamMembers: TeamMember[] = Object.values(teamMemberMap);
 
+  teamMembers.map(changeName)
+
   // sort them alphabetically
-  teamMembers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en']));
+  teamMembers.sort((s1, s2) => s1.displayName.localeCompare(s2.displayName, ['pl', 'en']));
   // group by the first letter of their names
-  const grouped = groupBy(teamMembers, s => s.name[0].toUpperCase());
+  const grouped = groupBy(teamMembers, s => s.displayName[0].toUpperCase());
 
   // convert that to sections
   const sections = [];

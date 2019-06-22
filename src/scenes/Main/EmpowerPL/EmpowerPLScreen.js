@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import EmpowerPLMainScreen from './EmpowerPLDetails/EmpowerPLMainScreen';
 import icon from './assets/EmpowerPLlogo.png';
 
 
 
-const EmpowerPLNavigator = StackNavigator({
+const EmpowerPLNavigator = createStackNavigator({
   List: {
     screen: EmpowerPLMainScreen,
   }

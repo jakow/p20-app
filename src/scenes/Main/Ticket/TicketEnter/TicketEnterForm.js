@@ -60,7 +60,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           Enter your details exactly as on your ticket:
         </Text>
         <Item floatingLabel>
-          <Label>Ticket ID</Label>
+          <Label style={{paddingTop: 5}}>Ticket ID</Label>
           <Input
             keyboardType="numeric"
             returnKeyType="next"
@@ -79,7 +79,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           </Text>
         </Button>
         <Item floatingLabel>
-          <Label>E-mail</Label>
+          <Label style={{paddingTop: 5}}>E-mail</Label>
           <Input
             onChangeText={text => this.props.updateData({ email: text })}
             value={this.props.email}

@@ -56,7 +56,7 @@ export default function TeamMemberThumbnail({ teamMember, onPress }: TeamMemberE
       <View style={style.container}>
         <LazyImage source={{ uri: teamMember.photo.secure_url }} style={style.thumbnail} />
         <View style={style.textContainer}>
-          <Text style={typography.body}>{teamMember.name}</Text>
+          <Text style={typography.body}>{teamMember.displayName}</Text>
           <Text style={[typography.small, typography.secondary]}>
             {formatPosition(teamMember)}
           </Text>

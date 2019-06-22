@@ -19,6 +19,13 @@ type SpeakerListProps = {
   loadAgenda: () => void,
 };
 
+function changeName(speaker){
+  var arr = speaker.name.split(" ");
+  temp = arr.pop();
+  arr.unshift(temp);
+  speaker.displayName = arr.join(" ");
+  return speaker;
+}
 
 function makeSections(speakerMap: SpeakerMap) {
   // get all speakers as list
@@ -27,10 +34,13 @@ function makeSections(speakerMap: SpeakerMap) {
     return [];
   }
   const speakers: Speaker[] = Object.values(speakerMap);
+
+  speakers.map(changeName)
   // sort them alphabetically
-  speakers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en']));
+  speakers.sort((s1, s2) => s1.displayName.localeCompare(s2.displayName, ['pl', 'en']));
+
   // group by the first letter of their names
-  const grouped = groupBy(speakers, s => s.name[0].toUpperCase());
+  const grouped = groupBy(speakers, s => s.displayName[0].toUpperCase());
   // convert that to sections
   const sections = [];
   Object.keys(grouped).forEach((letter) => {

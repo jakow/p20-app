@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { PermissionsAndroid, StatusBar, View } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 // import HomeScreen from './Home/HomeScreen';
 import AgendaScreen from './Agenda/AgendaScreen';
 import PeopleScreen from './People/PeopleScreen';
@@ -14,8 +14,9 @@ import { tabBarLabel } from './style';
 import { safeAreaBottom } from '../../theme/native-base-theme/variables/commonColor';
 
 import {Platform, StyleSheet} from 'react-native';
+import QuestionsScreen from './Questions/QuestionsScreen';
 
-const Tabs = TabNavigator({
+const TabsNavigator = createBottomTabNavigator({
   // Home: {
   //   screen: HomeScreen,
   // },
@@ -36,6 +37,9 @@ const Tabs = TabNavigator({
   },
   EmpowerPL: {
     screen: EmpowerPLScreen,
+  },
+  Questions: {
+    screen: QuestionsScreen,
   }
 }, {
   animationEnabled: true,
@@ -66,6 +70,8 @@ const Tabs = TabNavigator({
     },
   },
 });
+
+const Tabs = createAppContainer(TabsNavigator);
 
 export default function Main() {
   return (

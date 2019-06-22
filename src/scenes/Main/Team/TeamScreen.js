@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import TeamList from './TeamList';
 import TeamDetail from './TeamDetail';
 import icon from './assets/team.png';
 import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 
-const TeamNavigator = StackNavigator({
+const TeamNavigator = createStackNavigator({
   TeamList: {
     screen: TeamList,
   },

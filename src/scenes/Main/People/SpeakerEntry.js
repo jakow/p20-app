@@ -56,7 +56,7 @@ export default function SpeakerThumbnail({ speaker, onPress }: SpeakerEntryProps
       <View style={style.container}>
         <LazyImage source={{ uri: speaker.photo.secure_url }} style={style.thumbnail} />
         <View style={style.textContainer}>
-          <Text style={typography.body}>{speaker.name}</Text>
+          <Text style={typography.body}>{speaker.displayName}</Text>
           <Text style={[typography.small, typography.secondary]}>
             {formatPosition(speaker)}
           </Text>

@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
 import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import icon from './assets/ticket.png';
 import TicketEnterScreen from './TicketEnter/TicketEnterScreen';
 import TicketViewOrStartScreen from './TicketViewOrStartScreen';
 import TicketGet from './TicketGet/TicketGet';
 
-const TicketNavigator = StackNavigator({
+const TicketNavigator = createAppContainer(createStackNavigator({
   TicketViewOrStart: {
     screen: TicketViewOrStartScreen,
     header: null,
@@ -20,7 +20,7 @@ const TicketNavigator = StackNavigator({
   }
 }, {
   mode: 'modal',
-});
+}));
 
 export default function TicketScreen() {
   return <TicketNavigator />;

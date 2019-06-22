@@ -59,12 +59,20 @@ export function mergeArrays(arrays)
 function sendQuestion(questionDetail, navigation){
   if(questionDetail.selectedValue == "" || questionDetail.selectedValue == "initialValue")
   {
-    // Toast.show({
-    //             text: "Please select panel where you want to ask a question",
-    //             buttonText: "Okay",
-    //             type: "warning"
-    //           })
-    ToastAndroid.show("Please select panel where you want to ask a question", ToastAndroid.SHORT)
+    if(Platform.OS === 'ios'){
+          Alert.alert(
+              'Missing panel',
+              'Please select panel from the list',
+              [
+                {text: 'OK'},
+              ],
+              { cancelable: false }
+              )
+      }
+      else
+      {
+        ToastAndroid.show("Please select panel where you want to ask a question", ToastAndroid.SHORT)
+      }
   }
   else if(questionDetail.signature == "" || questionDetail.selectedValue == null)
   {
