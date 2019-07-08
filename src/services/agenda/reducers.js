@@ -2,6 +2,7 @@ import { REQUEST_AGENDA, RECEIVE_AGENDA, AGENDA_ERROR, TOGGLE_FAVOURITE } from '
 
 const initialState = {
   agenda: [],
+  dataNew: {},
   events: {},
   venues: {},
   categories: {},

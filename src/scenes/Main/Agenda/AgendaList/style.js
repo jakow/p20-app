@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
-import { primaryColor, backgroundGray, mediumGray, lightGray, white } from '../../../../theme/colors';
+import { primaryColor, backgroundGray, mediumGray, lightGray, white, newPink } from '../../../../theme/colors';
 import { statusBarSize } from '../../../../theme/native-base-theme/variables/commonColor';
 
 const listSideMargin = 14;
@@ -15,7 +15,7 @@ const agendaItemMargin = 7;
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
   },
 
   agendaHeader: {
@@ -131,7 +131,7 @@ export default StyleSheet.create({
     alignItems: 'stretch',
   },
   agendaEmptyText: {
-    color: mediumGray,
+    color: white,
   },
   detailImage: {
     resizeMode: 'cover',

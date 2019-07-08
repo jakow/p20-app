@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { backgroundDark, primaryColor, white } from '../../../../theme/colors';
+import { backgroundDark, primaryColor, white, newPink, newGreen } from '../../../../theme/colors';
 import { statusBarSize } from '../../../../theme/native-base-theme/variables/commonColor';
 const imageMargin = 20;
 
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     height: '100%',
     left: 0,
     right: 0,
-    backgroundColor: white,
+    backgroundColor: newPink,
   },
 
   banner: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     marginBottom: imageMargin,
   },
   container: {
-    backgroundColor: white,
+    backgroundColor: newPink,
     padding: 15,
   },
   body: {
@@ -56,6 +56,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     marginBottom: 15,
+    backgroundColor: newGreen
   },
   spacer: {
     width: 15,

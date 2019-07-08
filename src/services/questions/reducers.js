@@ -15,13 +15,6 @@ export default function questions(state = initialState, action) {
       return { ...action.payload, fetching: false, error: false };
     case QUESTIONS_ERROR:
       return { ...state, error: true, fetching: false };
-    case TOGGLE_FAVOURITE:
-      if (state.favourites.has(action.payload)) {
-        state.favourites.delete(action.payload);
-      } else {
-        state.favourites.add(action.payload);
-      }
-      return { ...state, favourites: new Set(state.favourites) };
     default:
       return state;
   }

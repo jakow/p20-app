@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Linking } from 'react-native';
 import { Button, Text } from 'native-base';
 import style from './style';
-
+// <Text style={{ textAlign: 'center', marginTop: 0}}>Apply Now!</Text>
 export default function EmpowerPLInfo() {
   return (
         <View>
@@ -11,7 +11,7 @@ export default function EmpowerPLInfo() {
             rounded
             style={style.appBttn}
             onPress={ ()=>{ Linking.openURL('http://empowerpl.com/')}}>
-              <Text style={{ textAlign: 'center', marginTop: 0}}>Apply Now!</Text>
+          <Text style={{width: '100%', textAlign: 'center' }}>Apply Now!</Text>
           </Button>
 
         </View>

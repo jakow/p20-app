@@ -63,7 +63,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   appBttn: {
-    flex: 1,
+    //flex: 1,
     width: '90%',
     justifyContent: 'center',
     marginBottom: 30,

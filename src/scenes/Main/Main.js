@@ -9,12 +9,13 @@ import EmpowerPLScreen from './EmpowerPL/EmpowerPLScreen';
 import LocationScreen from './Navigation/NavigationScreen';
 import TeamScreen from './Team/TeamScreen';
 import TicketScreen from './Ticket/TicketScreen';
-import { white, primaryColor, secondaryColor } from '../../theme/colors';
+import { white, primaryColor, secondaryColor, lightGray, mediumGray} from '../../theme/colors';
 import { tabBarLabel } from './style';
 import { safeAreaBottom } from '../../theme/native-base-theme/variables/commonColor';
 
 import {Platform, StyleSheet} from 'react-native';
 import QuestionsScreen from './Questions/QuestionsScreen';
+import { gray } from 'ansi-colors';
 
 const TabsNavigator = createBottomTabNavigator({
   // Home: {
@@ -45,11 +46,16 @@ const TabsNavigator = createBottomTabNavigator({
   animationEnabled: true,
   tabBarOptions: {
     scrollEnabled: true,
-    activeTintColor: primaryColor,
-    inactiveTintColor: secondaryColor,
+    activeTintColor: white,
+    inactiveTintColor: mediumGray,
     labelStyle: tabBarLabel,
     style: {
-      backgroundColor: white,
+      elevation: 5,
+      shadowColor: '#000000',
+      shadowOffset: { height: 5 }, 
+      shadowOpacity: 0.75,
+      shadowRadius: 5,
+      backgroundColor: primaryColor,
       ...Platform.select({
         android: {
           marginTop: 30,

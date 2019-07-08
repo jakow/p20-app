@@ -57,7 +57,7 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
               style={style.button}
               onPress={onTicketGet}
             >
-              <Text style={[typography.body, { color: primaryColor, textAlign: 'center' }]}>
+              <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
                 I do not have a ticket
               </Text>
             </Button>

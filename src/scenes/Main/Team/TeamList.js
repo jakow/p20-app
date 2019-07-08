@@ -6,7 +6,7 @@ import { groupBy } from 'lodash';
 import fetchAgenda from '../../../services/agenda/actions';
 import ViewHeader from '../../../components/ViewHeader';
 import TeamMemberEntry from './TeamEntry';
-import { backgroundGray, lightGray, white } from '../../../theme/colors';
+import { backgroundGray, lightGray, white, newPink } from '../../../theme/colors';
 import typography from '../../../theme/typography';
 import type { TeamMember } from '../../../services/agenda/types';
 import { statusBarSize } from '../../../theme/native-base-theme/variables/commonColor';
@@ -19,25 +19,24 @@ type TeamMemberListProps = {
   loadAgenda: () => void,
 };
 
-function changeName(speaker){
+function changeName(speaker, index){
   var arr = speaker.name.split(" ");
   temp = arr.pop();
   arr.unshift(temp);
-  speaker.displayName = arr.join(" ");
+  speaker.name = arr.join(" ");
   return speaker;
 }
 
 function makeSections(teamMemberMap: TeamMemberMap) {
   // get all teamMembers as list
-
   const teamMembers: TeamMember[] = Object.values(teamMemberMap);
 
   teamMembers.map(changeName)
 
   // sort them alphabetically
-  teamMembers.sort((s1, s2) => s1.displayName.localeCompare(s2.displayName, ['pl', 'en']));
+  teamMembers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en']));
   // group by the first letter of their names
-  const grouped = groupBy(teamMembers, s => s.displayName[0].toUpperCase());
+  const grouped = groupBy(teamMembers, s => s.name[0].toUpperCase());
 
   // convert that to sections
   const sections = [];
@@ -59,10 +58,10 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: statusBarSize,
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
   },
   section: {
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
     paddingHorizontal: 15,
     paddingVertical: 4,
   },
@@ -126,19 +125,21 @@ function returnValue(teamMembers, id)
 }
 
 function TeamMemberList(props: TeamMemberListProps) {
-  const sections = makeSections(props.teamMembers);
+  const sections = props.teamMembers ? makeSections(props.teamMembers) : null;
   let singleMember = {};
   const teamMembers = props.teamMembers;
   const { navigation } = props;
+  let i = 0;
 
   return (
     <View style={style.container}>
-      <SectionList
+      {props.teamMembers ? <SectionList
         style={style.list}
         sections={sections}
         keyExtractor={teamMember => teamMember._id}
         renderItem={({ item }) => (
           <TeamMemberEntry
+            index={teamMembers.sort((s1, s2) => s1.name.localeCompare(s2.name, ['pl', 'en'])).indexOf(item)}
             teamMember={item}
             onPress={(teamMemberId) => {
               singleMember = returnValue(teamMembers, teamMemberId);
@@ -148,12 +149,11 @@ function TeamMemberList(props: TeamMemberListProps) {
           />)}
         renderSectionHeader={renderSection}
         ItemSeparatorComponent={Separator}
-        SectionSeparatorComponent={SectionSeparator}
         ListHeaderComponent={Header}
         ListFooterComponent={Footer}
         refreshing={props.refreshing}
         onRefresh={props.loadAgenda}
-      />
+      /> : null}
     </View>
   );
 }
@@ -164,7 +164,7 @@ TeamMemberList.navigationOptions = {
 
 function mapStateToProps(state) {
   return {
-    teamMembers: state.agenda.teamMembers,
+    teamMembers: state.agenda.data.teamMembers,
     refreshing: state.agenda.fetching,
   };
 }

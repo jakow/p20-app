@@ -4,7 +4,7 @@ import { ScrollView, View, Text, StyleSheet, Linking, TouchableWithoutFeedback, 
 import { connect } from 'react-redux';
 import LazyImage from '../../../components/LazyImage';
 import HeaderBackButton from '../../../components/HeaderBackButton';
-import { white, mediumGray, primaryColor } from '../../../theme/colors';
+import { white, mediumGray, primaryColor, newPink } from '../../../theme/colors';
 import typography from '../../../theme/typography';
 import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 import type { TeamMember } from '../../../services/agenda/types';
@@ -16,13 +16,12 @@ type TeamDetailProps = {
 
 const style = StyleSheet.create({
   scrollView: {
-    backgroundColor: white,
+    backgroundColor: newPink,
     flex: 1,
-
   },
   container: {
     flex: 1,
-    backgroundColor: white,
+    backgroundColor: newPink,
     alignItems: 'center',
     paddingTop: 24,
     paddingHorizontal: 15,
@@ -72,7 +71,7 @@ function returnValue(teamMembers, id)
 function TeamDetail({ teamMembers, navigation }: TeamDetailProps) {
   // const teamMember = teamMembers[navigation.state.params._id];
   const teamMember = returnValue(teamMembers, navigation.state.params.id);
-  const uri = teamMember.photo ? teamMember.photo.secure_url : null;
+  const uri = teamMember.photo ? teamMember.photo.url : null;
   return (
     <ScrollView style={style.scrollView}>
       <View style={style.container}>
@@ -139,7 +138,7 @@ TeamDetail.navigationOptions = ({ navigation }) => ({
 });
 
 const mapStateToProps = state => ({
-  teamMembers: state.agenda.teamMembers,
+  teamMembers: state.agenda.data.teamMembers,
 });
 
 

@@ -1,4 +1,4 @@
-import { AsyncStorage, ToastAndroid } from 'react-native';
+import { AsyncStorage, ToastAndroid, Platform, AlertIOS } from 'react-native';
 import { keyBy } from 'lodash';
 import { REQUEST_QUESTIONS, RECEIVE_QUESTIONS, QUESTIONS_ERROR, TOGGLE_FAVOURITE } from './constants';
 import { parseDates, normalizeData, sortArray } from '../agenda/utils';
@@ -30,7 +30,14 @@ export async function sendQuestionToServer(data){
     ToastAndroid.show("Error sending question", ToastAndroid.SHORT)
     return false;
   } finally{
-    ToastAndroid.show("Question was asked", ToastAndroid.SHORT)
+    if(Platform.OS === 'ios')
+    {
+        AlertIOS.alert('Question sent','Question has been sent to server. Wait for acceptance')
+    }
+    else
+    {
+        ToastAndroid.show("Question was asked", ToastAndroid.SHORT)
+    }
     return true;
   }
 }
