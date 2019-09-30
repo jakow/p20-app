@@ -11,6 +11,6 @@ export default function EmpowerPLTop() {
           <Text style={style.mentor}>Mentoring Programme</Text>
           <Text style={style.empo}>empowerPL</Text>
           <View style={style.separator} />
-          <Text style={style.last}>Poland 2.0 <Text style={{fontWeight: 'bold'}}>X</Text> BCG{"\n"}{"\n"}{"\n"}</Text>
+          <Text style={style.last}>Poland 2.0 Summit<Text style={{fontWeight: 'bold'}}>X</Text> BCG{"\n"}{"\n"}{"\n"}</Text>
     </View>
   )};

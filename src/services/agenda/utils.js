@@ -48,13 +48,12 @@ export function normalizeData(agenda: any) {
 }
 
 
-export function formatEventTime(agendaTime?: {start?: Date, end?: Date}) {
-  if (!agendaTime) {
+export function formatEventTime(start: Date, end: Date) {
+  if (!start || !end) {
     return 'TBA';
   }
-  const { start, end } = agendaTime;
-  const startTime = moment(start).format('HH:mm');
-  const endTime = moment(end).format('HH:mm');
+  const startTime = moment(start).utc().format('HH:mm');
+  const endTime = moment(end).utc().format('HH:mm');
   if (start != null && end != null) {
     return `${startTime}—${endTime}`;
   } else if (start != null) {

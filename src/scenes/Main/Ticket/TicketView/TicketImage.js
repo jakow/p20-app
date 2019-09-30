@@ -15,7 +15,7 @@ type TicketImageProps = {
 const { height: deviceHeight } = Dimensions.get('window');
 
 export default function TicketImage({ ticket }: TicketImageProps) {
-
+  console.log(ticket)
   return (
     <View style={style.ticket}>
       <View style={[style.ticketNotch, style.ticketNotchTop]} />
@@ -28,12 +28,10 @@ export default function TicketImage({ ticket }: TicketImageProps) {
       />
 
       <View style={style.ticketField}>
-        <Text style={[typography.small, style.ticketFieldName]}>Ticket type</Text>
         <Text style={[typography.title3, style.ticketFieldValue]}>{ticket.ticketType}</Text>
       </View>
       <View style={style.ticketField}>
         <Text style={[typography.small, style.ticketFieldName]}>Attendee</Text>
-        <Text style={[typography.title3, style.ticketFieldValue]}>{`${ticket.firstName} ${ticket.lastName}`}</Text>
         <Text style={[typography.small, style.ticketFieldValue]}>{ticket.email}</Text>
       </View>
 
@@ -44,14 +42,6 @@ export default function TicketImage({ ticket }: TicketImageProps) {
           </Text>
           <Text style={[typography.small, style.ticketRowValue]}>
             {ticket.identifier}
-          </Text>
-        </View>
-        <View style={style.ticketTableRow}>
-          <Text style={[typography.small, style.ticketRowName]}>
-            Order ID
-          </Text>
-          <Text style={[typography.small, style.ticketRowValue]}>
-            {ticket.orderId}
           </Text>
         </View>
       </View>

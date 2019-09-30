@@ -57,7 +57,6 @@ class TicketView extends React.Component<void, TicketViewProps, TicketViewState>
     return (
       <View style={style.background}>
         <View style={style.addButtonContainer}>
-          <AddButton onPress={this.props.onTicketAdd} />
         </View>
         <View style={style.tabs}>
           <TabViewAnimated

@@ -30,6 +30,7 @@ function preloadAssets() {
     require('./src/scenes/Main/People/assets/people.png'),
     require('./src/scenes/Main/Ticket/assets/reticle.png'),
     require('./src/scenes/Main/Ticket/assets/ticket.png'),
+    require('./src/scenes/Main/Ticket/assets/check-mark.png'),
   ].map(image => Asset.fromModule(image).downloadAsync()));
 }
 

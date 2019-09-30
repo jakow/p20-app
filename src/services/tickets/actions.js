@@ -1,6 +1,7 @@
 // @flow
-import { AsyncStorage } from 'react-native';
-import { TICKETS_ENDPOINT, ADD_TICKETS, UPDATE_FORM_DATA, SET_FORM_STATE } from './constants';
+import { AsyncStorage, ToastAndroid, Platform, AlertIOS } from 'react-native';
+
+import { TICKETS_ENDPOINT, ADD_TICKETS, UPDATE_FORM_DATA, SET_FORM_STATE, TICKETS_ERROR, RECEIVE_TICKETS, ERROR_TICKET, SUCCESS_TICKET, LOADING_TICKET } from './constants';
 import type { FormState, Ticket } from './types';
 
 const ERROR_DURATION = 3000;
@@ -73,13 +74,13 @@ export async function persistTicketToStorage(ticket: Ticket, storage: AsyncStora
 export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) => void) {
   return async (dispatch: (action: any) => void, getState: () => any) => {
     dispatch(loading(true));
-    const formState = getState().ticketForm;
+    const { email, ticketId }  = getState().ticketForm;
     const form = JSON.stringify({
-      email: formState.email.trim(),
-      identifier: formState.ticketId.trim(),
+      email: email,
+      code: ticketId,
     });
     try {
-      const response = await fetch(`${TICKETS_ENDPOINT}/validate`, {
+      const response = await fetch(`${TICKETS_ENDPOINT}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,11 +96,12 @@ export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) 
         return;
       }
 
-      const ticket: Ticket = await response.json();
-      const currentTickets: Ticket[] = getState().tickets;
-      if (!currentTickets.find(t => t.identifier === ticket.identifier)) {
-        dispatch(addTickets([ticket]));
-      }
+      const ticket = {
+        email: email,
+        identifier: ticketId,
+      };
+
+      dispatch(addTickets([ticket]));
       persistTicketToStorage(ticket);
       dispatch(updateData({ ticketId: '', email: '' }));
       if (onSuccess) {
@@ -113,6 +115,32 @@ export function findTicket(onSuccess?: () => void, onFailure?: (reason: string) 
       dispatch(showError(message));
     } finally {
       dispatch(loading(false));
+    }
+  };
+}
+
+export function fetchTickets() {
+
+  return async (dispatch) => {
+    let ticketObjects = [];
+    try {
+      ticketsObjects = await Promise.all([
+        getTicketsFromStorage(),
+      ]);
+
+    } catch (e) {
+      if (ticketObjects == []) {
+        dispatch({
+          type: TICKETS_ERROR,
+          payload: {},
+        });
+      }
+    } finally {
+      console.log(ticketObjects)
+      dispatch({
+        type: RECEIVE_TICKETS,
+        payload: {tickets: ticketsObjects},
+      });
     }
   };
 }

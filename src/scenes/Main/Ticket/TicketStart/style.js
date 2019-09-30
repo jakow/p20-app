@@ -62,4 +62,8 @@ export default StyleSheet.create({
     width: 15,
     flex: 0,
   },
+  bordered: {
+    borderWidth: 1,
+    borderColor: white,
+  },
 });

@@ -4,7 +4,7 @@ import { ScrollView, View, Text, StyleSheet, Linking, TouchableWithoutFeedback, 
 import { connect } from 'react-redux';
 import LazyImage from '../../../components/LazyImage';
 import HeaderBackButton from '../../../components/HeaderBackButton';
-import { white, mediumGray, primaryColor, newPink } from '../../../theme/colors';
+import { white, mediumGray, primaryColor, newPink, newGreen } from '../../../theme/colors';
 import typography from '../../../theme/typography';
 import { safeAreaTop } from '../../../theme/native-base-theme/variables/commonColor';
 import type { TeamMember } from '../../../services/agenda/types';
@@ -120,25 +120,26 @@ function TeamDetail({ teamMembers, navigation }: TeamDetailProps) {
 
 TeamDetail.navigationOptions = ({ navigation }) => ({
   headerStyle: {
-    backgroundColor: white,
+    backgroundColor: newGreen,
     paddingTop: 0,
     height: 44,
   },
   headerTitle: 'Team',
   headerTitleStyle: {
     fontFamily: 'Source Sans Pro SemiBold',
+    color: white
   },
   headerLeft: (
     <HeaderBackButton
       title="Back"
-      color={primaryColor}
+      color={white}
       onPress={() => navigation.goBack()}
     />
   ),
 });
 
 const mapStateToProps = state => ({
-  teamMembers: state.agenda.data.teamMembers,
+  teamMembers: state.agenda.agenda.teamMembers,
 });
 
 

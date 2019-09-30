@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { backgroundGray, mediumGray, white } from '../../../../theme/colors';
+import { backgroundGray, mediumGray, white, newPink } from '../../../../theme/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
   },
   headerContainer: {
     position: 'absolute',

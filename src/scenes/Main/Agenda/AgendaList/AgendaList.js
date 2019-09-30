@@ -14,6 +14,8 @@ import AgendaFooter from './AgendaFooter';
 import AgendaHeader from './AgendaHeader';
 import AgendaItem from './AgendaItem';
 import style from './style';
+import { white } from '../../../../theme/colors';
+import { fetchTickets } from '../../../../services/tickets/actions';
 
 function dayToSection(agendaDay) {
   return { ...agendaDay, key: agendaDay._id, data: sortEvents(agendaDay.events) };
@@ -21,8 +23,8 @@ function dayToSection(agendaDay) {
 
 function sortEvents(agendaEvents){
   agendaEvents.sort((s1, s2) => {
-    var t1 = new Date(s1.time.start);
-    var t2 = new Date(s2.time.start);
+    var t1 = new Date(s1.startTime);
+    var t2 = new Date(s2.startTime);
     return t1.getTime() - t2.getTime()});
 
   return agendaEvents;
@@ -30,45 +32,11 @@ function sortEvents(agendaEvents){
 
 function sortEvent(agendaDay){
   agendaDay.data = agendaDay.data.sort((s1, s2) => {
-    var t1 = new Date(s1.time.start);
-    var t2 = new Date(s2.time.start);
+    var t1 = new Date(s1.startTime);
+    var t2 = new Date(s2.startTime);
     return t1.getTime() - t2.getTime()});
 
   return agendaDay;
-}
-
-function createSections(agendaDays, eventCategories, venues) {
-  if(agendaDays===undefined)
-  {
-    return [];
-  }
-
-
-  const sectionsRet = agendaDays.map(dayToSection)
-  const sections = sectionsRet.map(sortEvent)
-  // ToastAndroid.show(Object.entries(sections[0]).toString(), ToastAndroid.SHORT);
-
-
-  if (sections.length) {
-    sections[0].first = true
-  }
-  for (let i = 0; i < sections.length; i += 1) {
-    const s = sections[i];
-    for (let j = 0; j < s.events.length; j += 1) {
-      const ev = s.events[j];
-      if (ev.category) {
-        ev.color = eventCategories[ev.category].color;
-      }
-      if (ev.venue) {
-        ev.venue = venues[ev.venue];
-      }
-    }
-  }
-
-  const retVal = sections.map(sortEvent);
-  // this.setState({data: ["done"]})
-
-  return retVal;
 }
 
 function renderAgendaItem(agendaEvent, eventCategories, onSelect) {
@@ -77,7 +45,7 @@ function renderAgendaItem(agendaEvent, eventCategories, onSelect) {
     <View>
       <AgendaItem
         agendaEvent={agendaEvent}
-        color={agendaEvent.category && eventCategories[agendaEvent.category].color}
+        color={agendaEvent.category ? agendaEvent.category.color : white}
       />
       <TouchableHighlight
         style={style.agendaItemTouchable}
@@ -107,15 +75,49 @@ state = {
 class AgendaList extends React.Component<void, AgendaProps, void> {
   componentWillMount() {
     this.props.loadAgenda();
+    this.props.loadTickets();
+  }
+
+  createSections(agendaDays, eventCategories, venues) {
+    if(agendaDays===undefined)
+    {
+      return [];
+    }
+  
+  
+    const sectionsRet = agendaDays.map(dayToSection)
+    const sections = sectionsRet.map(sortEvent)
+    // ToastAndroid.show(Object.entries(sections[0]).toString(), ToastAndroid.SHORT);
+    
+    // if (sections.length) {
+    //   sections[0].first = true
+    // }
+    // for (let i = 0; i < sections.length; i += 1) {
+    //   const s = sections[i];
+    //   for (let j = 0; j < s.events.length; j += 1) {
+    //     const ev = s.events[j];
+    //     if (ev.category) {
+    //       ev.color = ev.category.color;
+    //     }
+    //     if (ev.venue) {
+    //       ev.venue = venues[ev.venue];
+    //     }
+    //   }
+    // }
+    const retVal = sections.map(sortEvent);
+    // this.setState({data: ["done"]})
+    return retVal;
   }
 
   render() {
     const {
-      agenda, categories, venues, loadAgenda, refreshing, onItemSelect,
+      agenda, venues, loadAgenda, refreshing, onItemSelect,
     } = this.props;
     const isEmpty = agenda == null || agenda.length === 0;
 
-    const agendaConst = createSections(agenda, categories, venues);
+    const categories = null
+
+    const agendaConst = agenda.agenda ? this.createSections(agenda.agenda.agendaDays, categories, venues) : [];
 
     return (
       <View>
@@ -136,14 +138,14 @@ class AgendaList extends React.Component<void, AgendaProps, void> {
 }
 
 const mapStateToProps = state => ({
-  agenda: state.agenda.agenda,
-  categories: state.agenda.categories,
+  agenda: state.agenda,
   venues: state.agenda.venues,
   refreshing: state.agenda.fetching,
 });
 
 const mapDispatchToProps = dispatch => ({
   loadAgenda: () => dispatch(fetchAgenda()),
+  loadTickets: () => dispatch(fetchTickets()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AgendaList);

@@ -26,7 +26,7 @@ const style = StyleSheet.create({
 export default function SpeakerThumbnail({ speaker }: SpeakerProps) {
   return (
     <View style={style.container}>
-      <LazyImage source={{ uri: speaker.photo.secure_url }} style={style.thumbnail} />
+      <LazyImage source={{ uri: speaker.photo.url }} style={style.thumbnail} />
       <Text style={typography.title3}>{speaker.name}</Text>
     </View>
   );

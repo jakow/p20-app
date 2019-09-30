@@ -10,6 +10,8 @@ export async function getQuetionsFromEndpoint() {
   return result;
 }
 
+
+
 export async function sendQuestionToServer(data){
   try {
     const form = JSON.stringify({askedBy: data.askedBy, text: data.text, forEvent: data.forEvent});

@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import {Linking} from 'react-native';
 import TicketStart from './TicketStart/TicketStart';
 import TicketView from './TicketView/TicketView';
+import { getTicketsFromStorage } from '../../../services/tickets/actions';
 import type { Ticket } from '../../../services/tickets/types';
 // import AppLink from 'react-native-app-link';
 
@@ -11,31 +13,22 @@ type Props = {
   navigation: any,
 };
 
-function TicketViewOrStartScreen({ navigation, tickets }: Props) {
+function TicketViewOrStartScreen({ navigation, tickets, fetchTickets }: Props) {
   const openTicketEnter = () => {
-    /*
-      Tutaj jest link który stworzył Jakub gdzie użytkownik mógł przetrzymywać bilet
-      do tego było specjalny endpoind api.poland20.com/tickets ale nie był używany w 2018 edycji
-      początkowo używany był ticketbase ale strona nie działała i przerzuciliśmy się na eventbrite
-      dlatego używamy ich aplikacji. Jeśli chcecie używać poprzedniego api, po prostu odkomentuj poniższą linie kodu
-    */
     navigation.navigate('TicketEnter');
-    /* wtedy możesz to okomentować */
-    // const url = "Eventbrite://"
-    // const appName = "Eventbrite";
-    // const appStoreId = "487922291";
-    // const appStoreLocale = "uk"
-    // const playStoreId = "com.eventbrite.attendee"
-    // AppLink.maybeOpenURL(url, { appName, appStoreId, appStoreLocale, playStoreId }).then(() => {
-    //   // do stuff
-    // })
-    // .catch((err) => {
-    //   // handle error
-    // });
   };
 
   const openTicketGet = () => {
-    navigation.navigate('TicketGet');
+    //navigation.navigate('TicketGet');
+    Linking.openURL('https://poland20.com/tickets')
+  }
+
+  const openEmail = (data) => {
+    navigation.navigate('Email', {data: data});
+  }
+
+  const openSummary = (data) => {
+    navigation.navigate('TicketSummary', {data: data});
   }
 
   return (
@@ -46,6 +39,7 @@ function TicketViewOrStartScreen({ navigation, tickets }: Props) {
         <TicketStart
           onTicketAdd={openTicketEnter}
           onTicketGet={openTicketGet}
+          onEmailStep={openEmail}
         />
       )
   );
@@ -60,5 +54,10 @@ function mapStateToProps(state) {
     tickets: state.tickets,
   };
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTickets: () => dispatch(getTicketsFromStorage())
+  }
+}
 
-export default connect(mapStateToProps)(TicketViewOrStartScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(TicketViewOrStartScreen);

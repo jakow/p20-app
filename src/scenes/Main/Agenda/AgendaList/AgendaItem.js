@@ -25,7 +25,7 @@ export default function AgendaItem({ agendaEvent, color }: AgendaItemProps) {
     <View>
       <View style={style.agendaItem}>
         <View style={style.agendaItemContent}>
-          <Text style={typography.body}>{formatEventTime(agendaEvent.time)}</Text>
+          <Text style={typography.body}>{formatEventTime(agendaEvent.startTime, agendaEvent.endTime)}</Text>
           <Text style={typography.bodyStrong}>{agendaEvent.name}</Text>
         </View>
         <View>

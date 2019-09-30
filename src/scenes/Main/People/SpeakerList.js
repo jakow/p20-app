@@ -19,11 +19,13 @@ type SpeakerListProps = {
   loadAgenda: () => void,
 };
 
-function changeName(speaker){
+function changeName(speaker, index){
   var arr = speaker.name.split(" ");
   temp = arr.pop();
+  if(temp == "") { temp = arr.pop()}
   arr.unshift(temp);
   speaker.displayName = arr.join(" ");
+  speaker.index = index;
   return speaker;
 }
 
@@ -125,7 +127,7 @@ function SpeakerList(props: SpeakerListProps) {
         style={style.list}
         sections={sections}
         keyExtractor={speaker => speaker._id}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <SpeakerEntry
             speaker={item}
             onPress={speakerId => navigation.navigate('SpeakerDetail', { id: speakerId })}
@@ -148,7 +150,7 @@ SpeakerList.navigationOptions = {
 
 function mapStateToProps(state) {
   return {
-    speakers: state.agenda.speakers,
+    speakers: state.agenda.agenda.speakers,
     refreshing: state.agenda.fetching,
   };
 }

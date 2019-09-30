@@ -5,6 +5,10 @@ import {
   SET_FORM_STATE,
   VALID_EMAIL,
   VALID_CODE_REGEX,
+  ERROR_TICKET,
+  SUCCESS_TICKET,
+  LOADING_TICKET,
+  RECEIVE_TICKETS
 } from './constants';
 import type { Action } from '../types';
 import type { FormState, Ticket } from './types';
@@ -27,6 +31,11 @@ export function ticketFormReducer(
       return newState;
     case SET_FORM_STATE:
       return { ...formState, ...action.payload };
+    case LOADING_TICKET:
+    case ERROR_TICKET:
+    case SUCCESS_TICKET:
+    case RECEIVE_TICKETS:
+      return { ...formState, ...action.payload }
     default:
       return formState;
   }

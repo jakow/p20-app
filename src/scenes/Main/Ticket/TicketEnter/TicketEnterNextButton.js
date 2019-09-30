@@ -12,18 +12,22 @@ type TicketEnterNextButtonProps = {
 };
 
 class TicketEnterNextButton extends React.Component<void, TicketEnterNextButtonProps, void> {
-  onPress = () => {
-    const { dispatch, onSuccess, onFailure } = this.props;
-    dispatch(findTicket(onSuccess, onFailure));
-  }
 
   render() {
-    return (
-      <HeaderRightButton
-        disabled={this.props.disabled}
-        onPress={this.onPress}
-      />
-    );
+    const { disabled, onPress, onSuccess, onFailure } = this.props;
+
+    const renderButton = () => {
+      if(!disabled) {
+        return (<HeaderRightButton
+          disabled={disabled}
+          onPress={() => onPress(onSuccess, onFailure)}
+        />)
+      } else {
+        return null
+      }
+    }
+
+    return renderButton()
   }
 }
 
@@ -33,4 +37,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TicketEnterNextButton);
+function mapDispatchToProps(dispatch) {
+  return {
+    onPress: (onSuccess, onFailure) => dispatch(findTicket(onSuccess, onFailure)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketEnterNextButton);

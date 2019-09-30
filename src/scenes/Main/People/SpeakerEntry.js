@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View, Image } from 'react-native';
 import LazyImage from '../../../components/LazyImage';
 import typography from '../../../theme/typography';
-import { white, mediumGray, lightGray } from '../../../theme/colors';
+import { white, mediumGray, lightGray, newAzure, newBlue, newPink, newGreen, newViolet } from '../../../theme/colors';
 import backIcon from '../../../components/assets/back-icon.png';
 import type { Speaker } from '../../../services/agenda/types';
 
@@ -15,10 +15,14 @@ const style = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    height: 43,
-    backgroundColor: white,
+    paddingRight: 15,
+    height: 80,
+    backgroundColor: newAzure,
   },
+  back1: { backgroundColor: newAzure },
+  back2: { backgroundColor: newBlue },
+  back3: { backgroundColor: newGreen },
+  back0: { backgroundColor: newViolet },
   textContainer: {
     height: '100%',
     flex: 1,
@@ -26,9 +30,8 @@ const style = StyleSheet.create({
     marginLeft: 15,
   },
   thumbnail: {
-    width: 29,
-    height: 29,
-    borderRadius: 4,
+    width: 80,
+    height: 80,
     overflow: 'hidden',
   },
   chevron: {
@@ -40,25 +43,27 @@ const style = StyleSheet.create({
 });
 
 function formatPosition(speaker: Speaker) {
-  const { position, company } = speaker;
-  if (!company) {
+  const { position, organisation } = speaker;
+  if (!organisation) {
     return position;
   }
-  return company;
+  return organisation;
 }
 
-export default function SpeakerThumbnail({ speaker, onPress }: SpeakerEntryProps) {
+export default function SpeakerThumbnail({ speaker, onPress, index }: SpeakerEntryProps) {
   return (
     <TouchableHighlight
       onPress={() => onPress(speaker._id)}
       underlayColor={mediumGray}
     >
-      <View style={style.container}>
-        <LazyImage source={{ uri: speaker.photo.secure_url }} style={style.thumbnail} />
+      <View style={[style.container, style['back'+(speaker.index%4)]]}>
+        <LazyImage source={{ uri: speaker.photo.url }} style={style.thumbnail} />
         <View style={style.textContainer}>
-          <Text style={typography.body}>{speaker.displayName}</Text>
-          <Text style={[typography.small, typography.secondary]}>
-            {formatPosition(speaker)}
+          <Text style={[typography.body, typography.bold]}>{speaker.displayName}</Text>
+          <Text style={[typography.small, {color: white}]}>{speaker.organisation}</Text>
+          <Text />
+          <Text style={[typography.small, {color: white}]}>
+            {speaker.occupation}
           </Text>
         </View>
         <Image

@@ -1,11 +1,11 @@
 // @flow
 import { StyleSheet } from 'react-native';
-import { mediumGray, backgroundGray } from '../../../../theme/colors';
+import { mediumGray, backgroundGray, newPink, white, newGreen } from '../../../../theme/colors';
 
 export default StyleSheet.create({
   ticketEnterContainer: {
     flex: 1,
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
   },
   ticketEnterInfoText: {
     paddingHorizontal: 15,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     paddingVertical: 20,
-    color: mediumGray,
+    color: white,
   },
   closeIcon: {
     width: 24,
@@ -36,6 +36,7 @@ export default StyleSheet.create({
   button: {
     alignSelf: 'center',
     marginBottom: 10,
+    backgroundColor: newGreen,
   },
   reticle: {
     top: '50%',

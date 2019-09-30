@@ -11,25 +11,8 @@ type TicketStartProps = {
   onTicketAdd: () => void,
   onTicketGet: () => void,
 };
-/* in line 49 add code below if you want to add functionality of storing Ticket
-on device
 
-<View style={style.spacer} />
-<Button
-  primary
-  style={style.button}
-  onPress={onTicketAdd}
->
-  <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
-    I have a ticket
-  </Text>
-</Button>
-
-//
-
-*/
-
-export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartProps) {
+export default function TicketStart({ onTicketAdd, onTicketGet, openEmail }: TicketStartProps) {
   return (
     <View>
       <ScrollView style={{ height: '100%' }}>
@@ -61,7 +44,17 @@ export default function TicketStart({ onTicketAdd, onTicketGet }: TicketStartPro
                 I do not have a ticket
               </Text>
             </Button>
-
+            <View style={style.spacer} />
+            <Button
+              bordered
+              primary
+              style={[style.button, style.bordered]}
+              onPress={onTicketAdd}
+            >
+              <Text style={[typography.body, { color: white, textAlign: 'center' }]}>
+                I have a ticket
+              </Text>
+            </Button>
             <View style={style.spacer} />
             <Button
               primary

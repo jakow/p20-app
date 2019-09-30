@@ -12,9 +12,11 @@ export const backgroundGray = '#F6F6F6';
 export const backgroundDark = '#2A2A33';
 export const white = '#FFFFFF';
 export const spinnerColor = Platform.OS === 'ios' ? mediumGray : primaryColor;
+export const black = '#000000'
 
 export const newGreen = "#66BB91";
 export const newViolet = "#AC1E70";
 export const newBlue = "#082E9B";
+export const newBlueLight = "#072E9B";
 export const newPink = "#c53D57";
 export const newAzure = "#70D8D1";

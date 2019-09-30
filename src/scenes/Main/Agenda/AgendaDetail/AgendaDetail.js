@@ -23,9 +23,21 @@ type AgendaDetailProps = {
 
 const RATIO = 1.6;
 
+function returnEvent (events, id) {
+  let [d1, d2, d3] = events
+  let r1 = d1.events.find(element => element.id === id);
+  let r2 = d2.events.find(element => element.id === id);
+  let r3 = d3.events.find(element => element.id === id);
+
+  if(r1) { return r1 }
+  if(r2) { return r2 }
+  if(r3) { return r3 }
+  return null
+}
+
 function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps, navi) {
-  const ev = events[eventId];
-  const speakerList = ev.speakers.map(id => speakers[id]);
+  let ev = returnEvent(events, eventId)
+  const speakerList = ev.speakers;
   const height = Dimensions.get('window').width / RATIO;
   const image = ev.image ? { uri: ev.image.secure_url } : defaultEventImage;
 
@@ -33,13 +45,13 @@ function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps, navi) {
     <View style={style.container}>
       <ScrollView>
         <View style={style.header}>
-          <LazyImage
+          { <LazyImage
             source={image}
             style={{ ...style.detailImage, width: '100%', height }}
-          />
+          /> }
           <View style={style.headerContainer}>
             <Text style={[typography.header, style.headerText]}>{ev.name}</Text>
-            <Text style={[typography.title2, style.headerText]}>{formatEventTime(ev.time)}</Text>
+            <Text style={[typography.title2, style.headerText]}>{formatEventTime(ev.startTime, ev.endTime)}</Text>
           </View>
         </View>
         <View style={style.footer}>
@@ -57,14 +69,14 @@ function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps, navi) {
         </View>
 
       </ScrollView>
-    </View>
+        </View>
   );
 }
 
 
 const mapStateToProps = state => ({
-  events: state.agenda.events,
-  speakers: state.agenda.speakers,
+  events: state.agenda.agenda.agendaDays,
+  // speakers: state.agenda.speakers,
 });
 
 export default connect(mapStateToProps)(AgendaDetail);

@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, Platform, StyleSheet, View } from 'react-native';
 import { Text } from 'native-base';
 import TouchableItem from './TouchableItem';
-import { primaryColor, lightGray } from '../theme/colors';
+import { primaryColor, lightGray, white } from '../theme/colors';
 import backIcon from './assets/back-icon.png';
 
 type HeaderRightButtonProps = {
@@ -81,7 +81,7 @@ export default function HeaderRightButton({
 
 HeaderRightButton.defaultProps = {
   title: 'Next',
-  color: primaryColor,
+  color: white,
   disabled: false,
   disabledColor: lightGray,
   onPress: null,

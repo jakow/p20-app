@@ -27,12 +27,16 @@ export type AgendaEvent = {
 } & DbEntry;
 
 export type AgendaDay = {
-  name: string;
-  date?: string;
-  description: string;
-  venue: Venue;
-  events: AgendaEvent[];
-  edition?: Edition;
+  _id: string,
+  name: string,
+  description: string,
+  startTime: string,
+  endTime: string,
+  createdAt: string,
+  updatedAt: string,
+  day: string,
+  id: string,
+  events: AgendaEvent
 } & DbEntry;
 z
 

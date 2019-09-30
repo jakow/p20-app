@@ -39,9 +39,9 @@ const TabsNavigator = createBottomTabNavigator({
   EmpowerPL: {
     screen: EmpowerPLScreen,
   },
-  Questions: {
-    screen: QuestionsScreen,
-  }
+  // Questions: {
+  //   screen: QuestionsScreen,
+  // }
 }, {
   animationEnabled: true,
   tabBarOptions: {

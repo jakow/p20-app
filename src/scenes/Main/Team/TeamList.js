@@ -164,7 +164,7 @@ TeamMemberList.navigationOptions = {
 
 function mapStateToProps(state) {
   return {
-    teamMembers: state.agenda.data.teamMembers,
+    teamMembers: state.agenda.agenda.teamMembers,
     refreshing: state.agenda.fetching,
   };
 }

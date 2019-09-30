@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import TicketEnter from './TicketEnter';
 import TicketEnterNextButton from './TicketEnterNextButton';
 import HeaderBackButton from '../../../../components/HeaderBackButton';
-import { white, primaryColor } from '../../../../theme/colors';
+import { white, primaryColor, newGreen } from '../../../../theme/colors';
 import { safeAreaTop } from '../../../../theme/native-base-theme/variables/commonColor';
 
 export default function TicketEnterScreen({ navigation }) {
@@ -24,18 +24,19 @@ function alertFailure(message: string) {
 
 TicketEnterScreen.navigationOptions = ({ navigation }) => ({
   headerStyle: {
-    backgroundColor: white,
+    backgroundColor: newGreen,
     height: 44 + safeAreaTop,
     paddingTop: safeAreaTop,
   },
   headerTitle: 'Enter ticket details',
   headerTitleStyle: {
     fontFamily: 'Source Sans Pro SemiBold',
+    color: white
   },
   headerLeft: (
     <HeaderBackButton
       title="Back"
-      color={primaryColor}
+      color={white}
       onPress={() => navigation.goBack()}
     />
   ),

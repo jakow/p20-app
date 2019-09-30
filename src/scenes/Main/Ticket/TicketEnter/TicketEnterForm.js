@@ -5,11 +5,12 @@ import { Alert, Image, Modal, View, Vibration } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 import { Button, Form, Item, Label, Text, Input } from 'native-base';
 import { VALID_CODE_REGEX } from '../../../../services/tickets/constants';
-import updateData from '../../../../services/tickets/actions';
+import updateData, { getTicketsFromStorage } from '../../../../services/tickets/actions';
 import style from './style';
 import typography from '../../../../theme/typography';
 import ModalHeader from '../../../../components/ModalHeader';
 import reticle from '../assets/reticle.png';
+import { white } from '../../../../theme/colors';
 
 type BarCodeScanResult = {
   data: string,
@@ -60,10 +61,11 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           Enter your details exactly as on your ticket:
         </Text>
         <Item floatingLabel>
-          <Label style={{paddingTop: 5}}>Ticket ID</Label>
+          <Label style={{paddingTop: 5, color: white}}>Ticket ID</Label>
           <Input
             keyboardType="numeric"
             returnKeyType="next"
+            style={{color:white}}
             onChangeText={text => this.props.updateData({ ticketId: text })}
             value={this.props.ticketId}
           />
@@ -79,10 +81,11 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           </Text>
         </Button>
         <Item floatingLabel>
-          <Label style={{paddingTop: 5}}>E-mail</Label>
+          <Label style={{paddingTop: 5, color: white}}>E-mail</Label>
           <Input
             onChangeText={text => this.props.updateData({ email: text })}
             value={this.props.email}
+            style={{color:white}}
             keyboardType="email-address"
             autoCorrect={false}
             autoCapitalize="none"
@@ -122,6 +125,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateData: data => dispatch(updateData(data)),
+    getData: () => dispatch(getTicketsFromStorage())
   };
 }
 

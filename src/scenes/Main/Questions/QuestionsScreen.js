@@ -18,13 +18,6 @@ export default class QuestionsScreen extends React.Component {
     headerTitleStyle: {
       fontFamily: 'Source Sans Pro SemiBold',
     },
-    headerLeft: (
-      <HeaderBackButton
-        title="Back"
-        color={primaryColor}
-        onPress={() => navigation.goBack()}
-      />
-    ),
     tabBarLabel: 'Questions',
     tabBarIcon: ({ tintColor }) => (
       <Image

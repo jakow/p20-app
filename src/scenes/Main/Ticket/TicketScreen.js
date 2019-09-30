@@ -5,7 +5,9 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import icon from './assets/ticket.png';
 import TicketEnterScreen from './TicketEnter/TicketEnterScreen';
 import TicketViewOrStartScreen from './TicketViewOrStartScreen';
-import TicketGet from './TicketGet/TicketGet';
+import TicketGet from './TicketBuy/TicketGet';
+import TicketEmail from './TicketBuy/TicketEmail/TicketEmail';
+import TicketSummary from './TicketBuy/TicketSummary/TicketSummary';
 
 const TicketNavigator = createAppContainer(createStackNavigator({
   TicketViewOrStart: {
@@ -17,6 +19,12 @@ const TicketNavigator = createAppContainer(createStackNavigator({
   },
   TicketGet: {
     screen: TicketGet,
+  },
+  TicketEmails: {
+    screen: TicketEmail,
+  },
+  TicketSummary: {
+    screen: TicketSummary,
   }
 }, {
   mode: 'modal',

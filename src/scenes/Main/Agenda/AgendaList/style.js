@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
-import { primaryColor, backgroundGray, mediumGray, lightGray, white, newPink } from '../../../../theme/colors';
+import { primaryColor, backgroundGray, mediumGray, lightGray, white, newPink, newAzure } from '../../../../theme/colors';
 import { statusBarSize } from '../../../../theme/native-base-theme/variables/commonColor';
 
 const listSideMargin = 14;
@@ -24,7 +24,7 @@ export default StyleSheet.create({
   },
 
   agendaDayHeader: {
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
     paddingLeft: listSideMargin,
     paddingRight: listSideMargin,
     paddingTop: agendaHeaderPadding + statusBarSize,
@@ -37,14 +37,14 @@ export default StyleSheet.create({
     width: blobSize,
     height: blobSize,
     borderRadius: 4,
-    backgroundColor: primaryColor,
+    backgroundColor: white,
     position: 'relative',
     left: -blobSize / 2,
   },
   agendaHeaderLine: {
     position: 'absolute',
     width: lineWidth,
-    backgroundColor: primaryColor,
+    backgroundColor: white,
     top: 0,
     bottom: 0,
     left: listSideMargin - (lineWidth / 2),
@@ -52,7 +52,7 @@ export default StyleSheet.create({
   agendaHeaderLineFirst: {
     position: 'absolute',
     width: lineWidth,
-    backgroundColor: primaryColor,
+    backgroundColor: white,
     height: agendaHeaderPadding + (agendaHeaderHeight / 2),
     bottom: 0,
     left: listSideMargin - (lineWidth / 2),
@@ -65,7 +65,7 @@ export default StyleSheet.create({
   },
 
   agendaItem: {
-    backgroundColor: white,
+    backgroundColor: newPink,
     padding: agendaItemPadding,
     paddingLeft: agendaItemPadding + 8,
     shadowColor: '#000000',
@@ -76,7 +76,7 @@ export default StyleSheet.create({
     marginRight: listSideMargin,
     marginTop: agendaItemMargin,
     marginBottom: agendaItemMargin,
-    borderColor: 'rgba(0, 0, 0, 0.15)',
+    borderColor: 'rgba(255, 255, 255, 0.15)',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 3,
     flexDirection: 'row',
@@ -87,6 +87,7 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 0,
     bottom: 0,
+    backgroundColor: white,
     left: listSideMargin - (lineWidth / 2),
   },
   agendaItemNotch: {

@@ -5,7 +5,7 @@ import { Linking, StyleSheet, Text, View } from 'react-native';
 import { Button, Spinner } from 'native-base';
 import HeaderBackButton from '../../../../components/HeaderBackButton';
 import { getTicketAvailability } from '../../../../services/tickets/actions';
-import { primaryColor, backgroundGray, mediumGray, white } from '../../../../theme/colors';
+import { primaryColor, backgroundGray, mediumGray, white, newPink } from '../../../../theme/colors';
 import typography from '../../../../theme/typography';
 import { safeAreaTop } from '../../../../theme/native-base-theme/variables/commonColor';
 
@@ -22,7 +22,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 24,
     paddingHorizontal: 12,
-    backgroundColor: backgroundGray,
+    backgroundColor: newPink,
   },
   infoText: {
     marginBottom: 20,
