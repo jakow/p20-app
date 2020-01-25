@@ -25,10 +25,10 @@ export class NavigationMainScreen extends React.Component {
       <View style={{ alignItems: 'center' }}>
         <MapView style={{ width: '100%', height: '100%' }}
           initialRegion={{
-            latitude: 51.50804935,
-            longitude: -0.1605672,
-            latitudeDelta: 0.07,
-            longitudeDelta: 0.07,
+            latitude: 51.5061768,
+            longitude: -0.1546971,
+            latitudeDelta: 0.075,
+            longitudeDelta: 0.075,
           }}>
           <MapView.Marker
             coordinate={{
@@ -40,8 +40,8 @@ export class NavigationMainScreen extends React.Component {
           />
           <MapView.Marker
             coordinate={{
-              latitude: 51.5173027,
-              longitude: -0.1887792,
+              latitude: 51.5158506,
+              longitude: -0.1213541,
             }}
             title={"De Vere Grand Connaught Rooms"}
             description={"Poland 2.0 Summit Ball - 26th October"}

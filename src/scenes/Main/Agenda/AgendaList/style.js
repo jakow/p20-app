@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
 
   agendaHeader: {
-    paddingTop: 20,
+    paddingTop: 44,
     marginBottom: -20,
   },
 

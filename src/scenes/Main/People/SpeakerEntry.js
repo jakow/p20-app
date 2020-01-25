@@ -51,13 +51,14 @@ function formatPosition(speaker: Speaker) {
 }
 
 export default function SpeakerThumbnail({ speaker, onPress, index }: SpeakerEntryProps) {
+  const uri = speaker.photo ? speaker.photo.url : "https://res.cloudinary.com/dg1royeho/image/upload/c_fill,g_faces,h_256,w_256/s8ys6gtqhefgevgo2xrm.png"
   return (
     <TouchableHighlight
       onPress={() => onPress(speaker._id)}
       underlayColor={mediumGray}
     >
       <View style={[style.container, style['back'+(speaker.index%4)]]}>
-        <LazyImage source={{ uri: speaker.photo.url }} style={style.thumbnail} />
+        <LazyImage source={{ uri }} style={style.thumbnail} />
         <View style={style.textContainer}>
           <Text style={[typography.body, typography.bold]}>{speaker.displayName}</Text>
           <Text style={[typography.small, {color: white}]}>{speaker.organisation}</Text>

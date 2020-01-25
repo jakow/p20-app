@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Platform } from 'react-native';
-import { white, mediumGray } from '../theme/colors';
+import { white, mediumGray, newGreen } from '../theme/colors';
 import typography from '../theme/typography';
 
 const style = StyleSheet.create({
   header: {
     paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
-    backgroundColor: white,
+    backgroundColor: newGreen,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: mediumGray,
   },

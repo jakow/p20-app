@@ -3,6 +3,7 @@ import React from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { groupBy } from 'lodash';
+import AgendaEmpty from '../Agenda/AgendaList/AgendaEmpty'
 import fetchAgenda from '../../../services/agenda/actions';
 import ViewHeader from '../../../components/ViewHeader';
 import SpeakerEntry from './SpeakerEntry';
@@ -135,6 +136,7 @@ function SpeakerList(props: SpeakerListProps) {
         renderSectionHeader={renderSection}
         ItemSeparatorComponent={Separator}
         SectionSeparatorComponent={SectionSeparator}
+        ListEmptyComponent={() =>  <AgendaEmpty type={"Speakers list"}/> }
         ListHeaderComponent={Header}
         ListFooterComponent={Footer}
         refreshing={props.refreshing}
@@ -149,8 +151,9 @@ SpeakerList.navigationOptions = {
 }
 
 function mapStateToProps(state) {
+
   return {
-    speakers: state.agenda.agenda.speakers,
+    speakers: state.agenda.agenda ? state.agenda.agenda.speakers : {},
     refreshing: state.agenda.fetching,
   };
 }

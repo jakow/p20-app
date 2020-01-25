@@ -136,7 +136,6 @@ export function fetchTickets() {
         });
       }
     } finally {
-      console.log(ticketObjects)
       dispatch({
         type: RECEIVE_TICKETS,
         payload: {tickets: ticketsObjects},

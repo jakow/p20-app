@@ -4,7 +4,7 @@ import { REQUEST_AGENDA, RECEIVE_AGENDA, AGENDA_ERROR, TOGGLE_FAVOURITE } from '
 import { TICKETS_ENDPOINT } from '../tickets/constants'
 import { parseDates, normalizeData, sortArray } from './utils';
 
-const AGENDA_ENDPOINT = 'https://api.poland20.com/currentEdition';
+const AGENDA_ENDPOINT = 'https://api.poland20.com/editions/current';
 
 export async function getAgendaFromEndpoint() {
   const result = await fetch(AGENDA_ENDPOINT).then(r => r.json());
@@ -36,7 +36,7 @@ export function toggleFavourite(id) {
 }
 
 export default function fetchAgenda() {
-  let agenda;
+  let dataNew;
 
   return async (dispatch) => {
     try {
@@ -49,9 +49,13 @@ export default function fetchAgenda() {
         agenda: agendaObject,
         tickets: Tickets,
       };
+
+      AsyncStorage.setItem('agenda', JSON.stringify(dataNew));
+
     } catch (e) {
-      agenda = await getAgendaFromLocalStorage(agenda);
-      if (agenda == null) {
+      dataNew = await AsyncStorage.getItem('agenda');
+      dataNew = JSON.parse(dataNew)
+      if (dataNew == null) {
         dispatch({
           type: AGENDA_ERROR,
           payload: {},

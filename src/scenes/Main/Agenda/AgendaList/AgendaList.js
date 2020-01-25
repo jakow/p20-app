@@ -127,7 +127,7 @@ class AgendaList extends React.Component<void, AgendaProps, void> {
         renderSectionHeader={({ section: agendaDay }) => <AgendaDayHeader agendaDay={agendaDay} />}
         ListHeaderComponent={AgendaHeader}
         ListFooterComponent={() => (isEmpty ? null : <AgendaFooter />)}
-        ListEmptyComponent={() => refreshing ? null: <AgendaEmpty /> }
+        ListEmptyComponent={() => refreshing ? null: <AgendaEmpty type={"Agenda"}/> }
         sections={agendaConst}
         onRefresh={loadAgenda}
         refreshing={refreshing}
@@ -138,8 +138,7 @@ class AgendaList extends React.Component<void, AgendaProps, void> {
 }
 
 const mapStateToProps = state => ({
-  agenda: state.agenda,
-  venues: state.agenda.venues,
+  agenda: state.agenda ? state.agenda : {},
   refreshing: state.agenda.fetching,
 });
 

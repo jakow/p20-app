@@ -9,7 +9,7 @@ import EmpowerPLScreen from './EmpowerPL/EmpowerPLScreen';
 import LocationScreen from './Navigation/NavigationScreen';
 import TeamScreen from './Team/TeamScreen';
 import TicketScreen from './Ticket/TicketScreen';
-import { white, primaryColor, secondaryColor, lightGray, mediumGray} from '../../theme/colors';
+import { white, primaryColor, secondaryColor, lightGray, mediumGray, newPink} from '../../theme/colors';
 import { tabBarLabel } from './style';
 import { safeAreaBottom } from '../../theme/native-base-theme/variables/commonColor';
 
@@ -58,7 +58,6 @@ const TabsNavigator = createBottomTabNavigator({
       backgroundColor: primaryColor,
       ...Platform.select({
         android: {
-          marginTop: 30,
           height: 49
         },
         ios: {
@@ -81,7 +80,7 @@ const Tabs = createAppContainer(TabsNavigator);
 
 export default function Main() {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: newPink }}>
       <StatusBar barStyle="dark-content" />
       <Tabs />
     </View>

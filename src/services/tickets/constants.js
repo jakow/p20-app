@@ -9,7 +9,7 @@ export const LOADING_TICKET = "LOADING_TICKET";
 export const SUCCESS_TICKET = "SUCCESS_TICKET";
 export const RECEIVE_TICKETS = "RECEIVE_TICKETS";
 
-export const VALID_CODE_REGEX = /^\d{9,}$/;
+export const VALID_CODE_REGEX = /^[A-Za-z0-9\-\_]{9,}$/;
 export const VALID_EMAIL = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-export const TICKETS_ENDPOINT = 'https://dev.poland20.com/tickets/verify';
+export const TICKETS_ENDPOINT = 'https://api.poland20.com/tickets/verify';

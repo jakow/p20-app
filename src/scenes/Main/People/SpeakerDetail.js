@@ -55,7 +55,7 @@ const style = StyleSheet.create({
 
 function SpeakerDetail({ speakers, navigation }: SpeakerDetailProps) {
   const speaker = speakers.find(element => {if(element._id == navigation.state.params.id) { return element }});
-  const uri = speaker.photo ? speaker.photo.url : null;
+  const uri = speaker.photo ? speaker.photo.url : 'https://res.cloudinary.com/dg1royeho/image/upload/c_fill,g_faces,h_256,w_256/s8ys6gtqhefgevgo2xrm.png';
   return (
     <ScrollView style={style.scrollView}>
       <View style={style.container}>
@@ -66,11 +66,16 @@ function SpeakerDetail({ speakers, navigation }: SpeakerDetailProps) {
           : null
         }
         {speaker.organisation ?
-          <Text style={[typography.title2, style.company]}>{speaker.organisation}</Text>
+          <Text style={[typography.title2, style.company, {fontWeight: "bold"}]}>{speaker.organisation}</Text>
           : null
         }
+        {speaker.askAbout ? 
+        [<Text key={0} style={ [typography.title2, style.description, {marginTop:10, marginBottom: 0, paddingBottom: 0}]}>Ask me about:</Text>,
+        <Text  key={1} style={[typography.body, style.description]}>{speaker.askAbout}</Text>]
+        : null}
         {speaker.description ?
-          <Text style={[typography.body, style.description]}>{speaker.description}</Text>
+          [<Text  key={2} style={ [typography.title2, style.description, {marginTop:0, marginBottom: 0, paddingBottom: 0}]}>About me:</Text>,
+          <Text  key={3} style={[typography.body, style.description]}>{speaker.description}</Text>]
           : null
         }
       </View>

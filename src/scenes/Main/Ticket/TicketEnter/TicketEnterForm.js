@@ -2,7 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Alert, Image, Modal, View, Vibration } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as Permissions from 'expo-permissions'
 import { Button, Form, Item, Label, Text, Input } from 'native-base';
 import { VALID_CODE_REGEX } from '../../../../services/tickets/constants';
 import updateData, { getTicketsFromStorage } from '../../../../services/tickets/actions';
@@ -63,7 +64,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
         <Item floatingLabel>
           <Label style={{paddingTop: 5, color: white}}>Ticket ID</Label>
           <Input
-            keyboardType="numeric"
+            keyboardType="default"
             returnKeyType="next"
             style={{color:white}}
             onChangeText={text => this.props.updateData({ ticketId: text })}
@@ -104,7 +105,7 @@ class TicketEnterForm extends React.Component<void, TicketEnterProps, TicketEnte
           <View style={{ flex: 1 }}>
             <BarCodeScanner
               barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-              onBarCodeRead={this.onScanCodeSuccess}
+              onBarCodeScanned={this.onScanCodeSuccess}
               style={{ flex: 1 }}
             />
             <Image source={reticle} style={style.reticle} />

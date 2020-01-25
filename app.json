@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "Poland 2.0",
-    "icon": "./src/assets/logo@3x.png",
-    "version": "0.9.7",
+    "name": "Poland 2.0 Summit",
+    "icon": "./src/assets/app-icon/app-store-icon.png",
+    "version": "0.9.11",
     "slug": "p20-app",
     "sdkVersion": "33.0.0",
     "ios": {
+      "buildNumber": "1",
       "bundleIdentifier": "com.poland20summit.app",
       "config": {
         "googleMapsApiKey": "AIzaSyAqr0gsz1czYe5kjyTbOVEBAhMR6wavFwA"
@@ -21,13 +22,16 @@
           "apiKey": "AIzaSyAqr0gsz1czYe5kjyTbOVEBAhMR6wavFwA"
         }
       },
-      "versionCode": 8,
+      "versionCode": 15,
       "permissions": [
         "NOTIFICATIONS",
         "READ_PHONE_STATE",
         "INTERNET",
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "ACCESS_NETWORK_STATE",
+        "VIBRATE"
       ]
     }
   }

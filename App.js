@@ -16,7 +16,7 @@ type AppState = {
   loaded: boolean;
 }
 
-const PUSH_ENDPOINT = 'https://www.poland20.com/api/notifications/register';
+const PUSH_ENDPOINT = 'https://api.poland20.com/notifications/register';
 
 function preloadAssets() {
   return Promise.all([
@@ -46,6 +46,7 @@ if (process.env.NODE_ENV === 'development') {
   AsyncStorage.multiRemove([
     'tickets',
     'agenda',
+    'notificationToken'
   ]);
 }
 
@@ -63,19 +64,24 @@ async function registerForPushNotificationsAsync() {
     return;
   }
   let token1 = await Notifications.getExpoPushTokenAsync();
+  let isRegistered = await AsyncStorage.getItem('notificationToken');
 
-  return fetch(PUSH_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      token: {
-        value: token1,
+  if (isRegistered == null) {
+    return fetch(PUSH_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-    }),
-  });
+      body: JSON.stringify({
+        token: {
+          value: token1,
+        },
+      }),
+    }).then(() => {
+      AsyncStorage.setItem('notificationToken', token1)
+    });
+  }
 }
 
 export default class App extends React.Component<void, {}, AppState> {
@@ -92,7 +98,7 @@ export default class App extends React.Component<void, {}, AppState> {
   }
 
   _handleNotification = (notification) => {
-    this.setState({notification: notification});
+    this.setState({ notification: notification });
   };
 
   componentWillMount() {

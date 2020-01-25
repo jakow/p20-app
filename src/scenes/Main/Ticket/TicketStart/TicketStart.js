@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, Text, ScrollView, View, Linking } from 'react-native';
 import { Button } from 'native-base';
 import typography from '../../../../theme/typography';
-import { primaryColor, white } from '../../../../theme/colors';
+import { primaryColor, white, newPink } from '../../../../theme/colors';
 import style from './style';
 import ticket from './assets/ticket.png';
 
@@ -15,7 +15,7 @@ type TicketStartProps = {
 export default function TicketStart({ onTicketAdd, onTicketGet, openEmail }: TicketStartProps) {
   return (
     <View>
-      <ScrollView style={{ height: '100%' }}>
+      <ScrollView style={{ height: '100%', backgroundColor: newPink}}>
         <View style={style.darkBg} />
         <View style={style.whiteBg} />
         <View style={style.banner}>

@@ -6,6 +6,7 @@ import { groupBy } from 'lodash';
 import fetchAgenda from '../../../services/agenda/actions';
 import ViewHeader from '../../../components/ViewHeader';
 import TeamMemberEntry from './TeamEntry';
+import AgendaEmpty from '../Agenda/AgendaList/AgendaEmpty';
 import { backgroundGray, lightGray, white, newPink } from '../../../theme/colors';
 import typography from '../../../theme/typography';
 import type { TeamMember } from '../../../services/agenda/types';
@@ -149,6 +150,7 @@ function TeamMemberList(props: TeamMemberListProps) {
           />)}
         renderSectionHeader={renderSection}
         ItemSeparatorComponent={Separator}
+        ListEmptyComponent={() => <AgendaEmpty type={"Team list"}/> }
         ListHeaderComponent={Header}
         ListFooterComponent={Footer}
         refreshing={props.refreshing}
@@ -164,7 +166,7 @@ TeamMemberList.navigationOptions = {
 
 function mapStateToProps(state) {
   return {
-    teamMembers: state.agenda.agenda.teamMembers,
+    teamMembers: state.agenda.agenda ? state.agenda.agenda.teamMembers : {},
     refreshing: state.agenda.fetching,
   };
 }

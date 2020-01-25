@@ -19,6 +19,7 @@ export default StyleSheet.create({
     padding: 20,
     margin: -20,
     backgroundColor: 'transparent',
+    fontSize: 28
   },
   footer: {
     padding: 15,

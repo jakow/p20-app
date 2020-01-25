@@ -63,7 +63,7 @@ function AgendaDetail({ eventId, events, speakers }: AgendaDetailProps, navi) {
             </Text> : null
           }
           <Text style={[typography.body, style.eventDescription]}>
-            {ev.description}
+            {ev.description.replace(/_/g, "\"")}
           </Text>
           
         </View>

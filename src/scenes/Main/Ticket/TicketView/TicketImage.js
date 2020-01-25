@@ -15,7 +15,6 @@ type TicketImageProps = {
 const { height: deviceHeight } = Dimensions.get('window');
 
 export default function TicketImage({ ticket }: TicketImageProps) {
-  console.log(ticket)
   return (
     <View style={style.ticket}>
       <View style={[style.ticketNotch, style.ticketNotchTop]} />
